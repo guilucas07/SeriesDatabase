@@ -43,6 +43,11 @@ class HomeFragment : Fragment() {
         setupObserver()
     }.root
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        binding = null
+    }
+
     private fun FragmentHomeBinding.setupView() {
         recyclerViewMovies.adapter = adapter
     }
