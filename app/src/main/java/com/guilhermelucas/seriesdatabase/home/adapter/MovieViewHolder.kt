@@ -1,25 +1,27 @@
 package com.guilhermelucas.seriesdatabase.home.adapter
 
-import android.view.View
 import androidx.recyclerview.widget.RecyclerView
+import com.guilhermelucas.seriesdatabase.databinding.AdapterMovieItemBinding
 import com.guilhermelucas.seriesdatabase.utils.extensions.loadImage
-import kotlinx.android.synthetic.main.adapter_movie_item.view.*
 
-class MovieViewHolder(val clickListener: (position: Int) -> Unit, itemView: View) :
-    RecyclerView.ViewHolder(itemView) {
+class MovieViewHolder(
+    private val clickListener: (position: Int) -> Unit,
+    private val layout: AdapterMovieItemBinding
+) : RecyclerView.ViewHolder(layout.root) {
 
     fun bind(movie: AdapterItem) {
+        with(layout) {
+            textMovieTitle.text = movie.title
 
-        itemView.textMovieTitle.text = movie.title
+            movie.releaseDate?.run {
+                textMovieReleaseDate.text = this
+            }
 
-        movie.releaseDate?.run {
-            itemView.textMovieReleaseDate.text = this
+            root.setOnClickListener {
+                clickListener(adapterPosition)
+            }
+
+            imageMoviePoster.loadImage(movie.posterUrl)
         }
-
-        itemView.setOnClickListener {
-            clickListener(adapterPosition)
-        }
-
-        itemView.imageMoviePoster.loadImage(movie.posterUrl)
     }
 }

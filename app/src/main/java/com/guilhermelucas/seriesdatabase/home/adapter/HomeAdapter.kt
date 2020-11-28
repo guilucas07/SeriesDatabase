@@ -3,35 +3,33 @@ package com.guilhermelucas.seriesdatabase.home.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.guilhermelucas.seriesdatabase.R
+import com.guilhermelucas.seriesdatabase.databinding.AdapterMovieItemBinding
 
 class HomeAdapter(
     private val clickListener: (position: Int) -> Unit
 ) :
     RecyclerView.Adapter<MovieViewHolder>() {
 
-    private val watchlist: ArrayList<AdapterItem> =
+    private val items: ArrayList<AdapterItem> =
         arrayListOf()
 
     fun loadItems(list: List<AdapterItem>) {
-        watchlist.clear()
-        watchlist.addAll(list)
+        items.clear()
+        items.addAll(list)
         notifyDataSetChanged()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
-        val view =
-            LayoutInflater.from(parent.context).inflate(R.layout.adapter_movie_item, parent, false)
         return MovieViewHolder(
             clickListener,
-            view
+            AdapterMovieItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         )
     }
 
-    override fun getItemCount() = watchlist.size
+    override fun getItemCount() = items.size
 
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
-        watchlist.getOrNull(position)?.let {
+        items.getOrNull(position)?.let {
             holder.bind(it)
         }
     }
