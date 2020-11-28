@@ -10,4 +10,23 @@
     <string name="menu_home">Home</string>
     <string name="menu_gallery">Gallery</string>
     <string name="menu_slideshow">Slideshow</string>
+
+    <string name="detail_see_backdrop">See backdrop</string>
+    <string name="genres">Genres</string>
+    <string name="detail_release_date">Release Date</string>
+    <string name="detail_overview">Overview</string>
+    <string name="home_search_title">Search</string>
+    <string name="home_search_hint">Search by name</string>
+    <string name="home_empty_view_title">No upcoming movie in your region.</string>
+    <string name="home_empty_view_description">Use the search icon and find more information about movies already
+        released
+    </string>
+
+    <string name="home_empty_view_search_title">No movies found for this search</string>
+    <string name="detail_error_backdrop_unavailable">Backdrop unavailable</string>
+    <string name="detail_error_poster_unavailable">Poster unavailable</string>
+    <string name="promotion_ad_check_out">Check out</string>
+    <string name="promotion_ad_title">Check out %1$s movies</string>
+    <string name="request_error_network">Connection error. Check your internet and try again</string>
+    <string name="request_error_unknown">An error has occurred on connection with server. Try again later</string>
 </resources>

@@ -1,0 +1,61 @@
+<resources>
+
+    <style name="AppTheme" parent="Theme.SeriesDatabase">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorControlNormal">@color/md_white_1000</item>
+        <item name="android:actionMenuTextColor">@color/md_white_1000</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="SearchViewCompat" parent="AppTheme">
+        <item name="android:editTextColor">@color/md_white_1000</item>
+        <item name="android:textColorHint">@color/md_white_1000</item>
+    </style>
+
+    <style name="Text.Body" parent="AppTheme">
+        <item name="android:textColor">@color/md_black_1000</item>
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+
+    <style name="Text.Heading" parent="AppTheme">
+        <item name="android:textColor">@color/md_black_1000</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:textSize">24sp</item>
+    </style>
+
+    <style name="Text.Heading.Large">
+        <item name="android:textSize">28sp</item>
+    </style>
+
+    <style name="Text.Heading.Small">
+        <item name="android:textSize">20sp</item>
+    </style>
+
+    <style name="Text.Caption" parent="AppTheme">
+        <item name="android:textColor">@color/md_black_1000</item>
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+
+    <style name="Text.Caption.Small">
+        <item name="android:textSize">14sp</item>
+    </style>
+
+
+    <style name="Text.Caption.Large" parent="Text.Caption">
+        <item name="android:textSize">24sp</item>
+    </style>
+
+    <style name="Button.Ghost" parent="Widget.AppCompat.Button">
+        <item name="android:textColor">@color/md_blue_grey_800</item>
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:padding">4dp</item>
+        <item name="android:background">@color/md_white_1000</item>
+    </style>
+
+</resources>
