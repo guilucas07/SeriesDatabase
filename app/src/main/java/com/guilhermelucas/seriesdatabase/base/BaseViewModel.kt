@@ -12,11 +12,11 @@ import java.net.UnknownHostException
 
 abstract class BaseViewModel : ViewModel() {
 
-    private val isLoading = MutableLiveData<Boolean>()
-    val isLoadingLiveData: LiveData<Boolean> = isLoading
+    private val _isLoading = MutableLiveData<Boolean>()
+    val isLoading: LiveData<Boolean> = _isLoading
 
-    protected fun showLoading() = isLoading.postValue(true)
-    protected fun hideLoading() = isLoading.postValue(false)
+    protected fun showLoading() = _isLoading.postValue(true)
+    protected fun hideLoading() = _isLoading.postValue(false)
 
     protected fun handleThrowable(throwable: Throwable): RequestError {
         if (BuildConfig.DEBUG)

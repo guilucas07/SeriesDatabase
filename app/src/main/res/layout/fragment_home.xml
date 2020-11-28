@@ -6,16 +6,6 @@
     android:layout_height="match_parent"
     android:background="@color/md_blue_grey_800">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="@color/md_blue_grey_500"
-        android:theme="@style/SearchViewCompat"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:titleTextColor="@color/md_white_1000" />
-
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/swipeRefreshMovies"
         android:layout_width="0dp"
@@ -23,7 +13,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar">
+        app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -84,6 +74,7 @@
                 android:paddingTop="12dp"
                 android:paddingBottom="12dp"
                 app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                app:spanCount="2"
                 tools:itemCount="10"
                 tools:listitem="@layout/adapter_movie_item" />
         </androidx.constraintlayout.widget.ConstraintLayout>
