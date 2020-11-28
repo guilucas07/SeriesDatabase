@@ -8,13 +8,13 @@ fun ShowResponse.toShow(): Show {
     fun String.forceHttps() : String = toUri().buildUpon().scheme("https").toString()
     return Show(
         id = id,
-        imageUrl = image.original.forceHttps(),
-        imageLargeUrl = image.medium.forceHttps(),
+        imageUrl = image?.medium?.forceHttps(),
+        imageLargeUrl = image?.original?.forceHttps(),
         name = name,
         language = language,
         officialSite = officialSite,
         premiered = premiered,
-        rating = rating.average,
+        rating = rating?.average,
         runtime = runtime,
         status = status,
         summary = summary,

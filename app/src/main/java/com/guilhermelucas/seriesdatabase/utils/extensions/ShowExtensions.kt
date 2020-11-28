@@ -7,8 +7,6 @@ import java.util.*
 
 fun Show.toAdapterItem(): AdapterItem {
 
-    val formattedDate = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(updated)
-
     return AdapterItem(
         id,
         name,
@@ -16,6 +14,6 @@ fun Show.toAdapterItem(): AdapterItem {
         rating,
         imageUrl.orEmpty(),
         imageLargeUrl.orEmpty(),
-        formattedDate
+        premiered
     )
 }
