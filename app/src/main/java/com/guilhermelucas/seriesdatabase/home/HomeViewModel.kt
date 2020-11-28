@@ -116,4 +116,28 @@ class HomeViewModel(private val repository: HomeRepository) : BaseViewModel() {
     fun onAllItemsAreShowed() {
         tryLoadMoreItems()
     }
+
+    fun searchMovie(query: String) = viewModelScope.launch {
+        if (query.length >= Constants.SEARCH_MIN_LETTERS) {
+            runCatching {
+                repository.searchShow(query)
+            }.onSuccess { returnedList ->
+                val newList = returnedList.map { it.show.toAdapterItem() }
+                _loadedSeries.postValue(newList)
+
+                _changeAdapterVisibility.postValue(
+                    if (newList.isNotEmpty())
+                        AdapterVisibility.DATA_VIEW
+                    else
+                        AdapterVisibility.SEARCH_EMPTY_VIEW
+                )
+
+                activityMode = ActivityMode.SEARCH
+            }.onFailure {
+                activityMode = ActivityMode.DEFAULT
+                _showRequestError.postValue(handleThrowable(it))
+            }
+
+        }
+    }
 }

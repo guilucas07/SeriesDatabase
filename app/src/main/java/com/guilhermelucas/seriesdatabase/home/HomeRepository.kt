@@ -1,6 +1,7 @@
 package com.guilhermelucas.seriesdatabase.home
 
 import com.guilhermelucas.data.datasource.SeriesDataSource
+import com.guilhermelucas.model.SearchShow
 import com.guilhermelucas.model.Show
 
 class HomeRepository(
@@ -19,6 +20,10 @@ class HomeRepository(
         }
 
         return seriesDataSource.loadAll(actualPage)
+    }
+
+    suspend fun searchShow(query : String) : List<SearchShow>{
+        return seriesDataSource.searchShow(query)
     }
 
 }
