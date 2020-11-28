@@ -1,11 +1,11 @@
 package com.guilhermelucas.seriesdatabase.home
 
-import com.guilhermelucas.data.datasource.SeriesDataSource
+import com.guilhermelucas.data.datasource.ShowDataSource
 import com.guilhermelucas.model.SearchShow
 import com.guilhermelucas.model.Show
 
 class HomeRepository(
-    private val seriesDataSource: SeriesDataSource
+    private val showDataSource: ShowDataSource
 ) {
     private var actualPage: Int = 0
 
@@ -19,11 +19,11 @@ class HomeRepository(
             else -> actualPage = 1
         }
 
-        return seriesDataSource.loadAll(actualPage)
+        return showDataSource.loadAll(actualPage)
     }
 
     suspend fun searchShow(query : String) : List<SearchShow>{
-        return seriesDataSource.searchShow(query)
+        return showDataSource.searchShow(query)
     }
 
 }

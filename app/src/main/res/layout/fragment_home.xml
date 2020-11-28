@@ -7,7 +7,7 @@
     android:background="@color/md_blue_grey_800">
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-        android:id="@+id/swipeRefreshMovies"
+        android:id="@+id/swipeRefreshShows"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -20,7 +20,7 @@
             android:layout_height="match_parent">
 
             <RelativeLayout
-                android:id="@+id/layoutEmptyMovies"
+                android:id="@+id/layoutEmptyShows"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"
@@ -49,7 +49,7 @@
             </RelativeLayout>
 
             <RelativeLayout
-                android:id="@+id/layoutEmptyMoviesSearch"
+                android:id="@+id/layoutEmptyShowsSearch"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"
@@ -67,7 +67,7 @@
             </RelativeLayout>
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerViewMovies"
+                android:id="@+id/recyclerViewShows"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:clipToPadding="true"
