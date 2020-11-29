@@ -1,8 +1,6 @@
 package com.guilhermelucas.data.model
 
-import com.squareup.moshi.Json
-
-data class ShowResponse(
+data class ShowWithSeasons(
     val _links: Links,
     val externals: Externals,
     val genres: List<String>,
@@ -22,5 +20,10 @@ data class ShowResponse(
     val updated: Int?,
     val url: String?,
     val webChannel: WebChannel?,
-    val weight: Int?
+    val weight: Int?,
+    val _embedded: EmbeddedSeasonResponse
+)
+
+data class EmbeddedSeasonResponse(
+    val seasons: List<SeasonResponse>
 )

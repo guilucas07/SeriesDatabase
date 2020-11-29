@@ -15,5 +15,6 @@ data class Show(
     val updated: Int?,
     val url: String?,
     val weight: Int?,
-    val rating : Double?
+    val rating : Double?,
+    val seasons: List<Season>? = null
 )

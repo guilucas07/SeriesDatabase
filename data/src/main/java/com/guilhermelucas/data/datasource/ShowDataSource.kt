@@ -13,4 +13,8 @@ class ShowDataSource(private val tvMazeApi: TVMazeApi) {
     suspend fun searchShow(query: String): List<SearchShow> {
         return tvMazeApi.searchShow(query).map { it.toSearchShow() }
     }
+
+    suspend fun searchShow(id: Int): Show {
+        return tvMazeApi.searchShow(id).toShow()
+    }
 }
