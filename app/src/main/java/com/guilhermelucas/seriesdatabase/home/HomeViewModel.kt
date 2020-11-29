@@ -6,6 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.guilhermelucas.model.Show
 import com.guilhermelucas.seriesdatabase.base.BaseViewModel
 import com.guilhermelucas.seriesdatabase.home.adapter.AdapterItem
+import com.guilhermelucas.seriesdatabase.utils.SingleLiveEvent
 import com.guilhermelucas.seriesdatabase.utils.extensions.toAdapterItem
 import com.guilhermelucas.seriesdatabase.utils.models.RequestError
 import kotlinx.coroutines.launch
@@ -20,7 +21,7 @@ class HomeViewModel(private val repository: HomeRepository) : BaseViewModel() {
     val loadedSeries: LiveData<List<AdapterItem>>
         get() = _loadedSeries
 
-    private val _goToDetails = MutableLiveData<Int>()
+    private val _goToDetails = SingleLiveEvent<Int>()
     val goToDetails: LiveData<Int>
         get() = _goToDetails
 
@@ -28,7 +29,7 @@ class HomeViewModel(private val repository: HomeRepository) : BaseViewModel() {
     val changeAdapterVisibility: LiveData<AdapterVisibility>
         get() = _changeAdapterVisibility
 
-    private val _showRequestError = MutableLiveData<RequestError>()
+    private val _showRequestError = SingleLiveEvent<RequestError>()
     val showRequestError: LiveData<RequestError>
         get() = _showRequestError
 
