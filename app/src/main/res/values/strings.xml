@@ -29,5 +29,5 @@
     <string name="season_with_number">Season %d</string>
     <string name="episode_duration_minutes">%d min</string>
     <string name="episodes">Episodes</string>
-
+    <string name="series_exhibition_description">%s at %s</string>
 </resources>

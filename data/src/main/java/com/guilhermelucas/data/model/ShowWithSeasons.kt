@@ -3,7 +3,7 @@ package com.guilhermelucas.data.model
 data class ShowWithSeasons(
     val _links: Links,
     val externals: Externals,
-    val genres: List<String>,
+    val genres: List<String>?,
     val id: Int,
     val image: Image?,
     val language: String,

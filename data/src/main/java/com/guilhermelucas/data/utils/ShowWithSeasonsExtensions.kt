@@ -24,7 +24,9 @@ fun ShowWithSeasons.toShow(): Show {
         updated = updated,
         url = url,
         weight = weight,
-        seasons = _embedded.seasons.map { it.toSeason() }
+        seasons = _embedded.seasons.map { it.toSeason() },
+        genres = genres,
+        seriesSchedule = schedule?.toSchedule()
     )
 }
 
