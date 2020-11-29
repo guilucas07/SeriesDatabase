@@ -1,58 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="180dp"
-        android:layout_height="300dp"
-        android:layout_marginBottom="4dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginStart="16dp"
-        android:background="@android:color/transparent"
-        tools:background="@color/md_blue_100"
-        android:layout_marginTop="4dp">
-
-    <ImageView
-            android:id="@+id/imageMoviePoster"
-            android:layout_width="170dp"
-            android:layout_height="250dp"
-            android:adjustViewBounds="true"
-            android:importantForAccessibility="no"
-            android:scaleType="fitXY"
-            android:src="@drawable/ic_image_placeholder"/>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="180dp"
+    android:layout_height="wrap_content"
+    android:layout_margin="12dp"
+    app:cardCornerRadius="2dp"
+    app:cardElevation="4dp">
 
     <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent">
+
+        <ImageView
+            android:id="@+id/imageMoviePoster"
             android:layout_width="match_parent"
-            android:layout_below="@+id/imageMoviePoster"
-            android:layout_height="match_parent">
+            android:layout_height="250dp"
+            android:importantForAccessibility="no"
+            android:adjustViewBounds="true"
+            android:scaleType="center"
+            android:src="@drawable/ic_image_placeholder" />
 
-        <TextView
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="8dp"
+            android:layout_below="@+id/imageMoviePoster">
+
+            <TextView
                 android:id="@+id/textMovieTitle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:lines="1"
-                android:layout_marginTop="8dp"
-                android:ellipsize="end"
-                android:layout_marginEnd="4dp"
                 style="@style/Text.Body"
-                android:textColor="@color/md_white_1000"
-                android:maxLines="2"
-                android:textStyle="bold"
-                tools:text="Titanic"/>
-
-        <TextView
-                android:id="@+id/textMovieReleaseDate"
-                style="@style/Text.Heading.Small"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="4dp"
-                android:layout_below="@+id/textMovieTitle"
-                android:layout_marginBottom="8dp"
-                android:textColor="@color/md_white_1000"
                 android:layout_marginStart="8dp"
-                android:textSize="12sp"
-                android:textStyle="italic"
-                tools:text="10/05/1997"/>
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="4dp"
+                android:ellipsize="end"
+                android:lines="1"
+                android:maxLines="2"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                tools:text="Titanic" />
 
+            <TextView
+                android:id="@+id/textMovieReleaseDate"
+                style="@style/Text.Body.Small"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textMovieTitle"
+                android:layout_marginHorizontal="8dp"
+                android:textColor="@color/black"
+                android:textStyle="italic"
+                tools:text="10/05/1997" />
+
+            <TextView
+                android:id="@+id/textMovieSimilarity"
+                style="@style/Text.Body.Small"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textMovieReleaseDate"
+                android:layout_marginHorizontal="8dp"
+                android:layout_marginTop="4dp"
+                android:textColor="@color/black"
+                android:textStyle="italic"
+                tools:text="Score 10%" />
+
+        </RelativeLayout>
     </RelativeLayout>
-</RelativeLayout>
+</androidx.cardview.widget.CardView>

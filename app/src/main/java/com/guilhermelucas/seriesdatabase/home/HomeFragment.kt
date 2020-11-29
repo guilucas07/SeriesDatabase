@@ -2,7 +2,9 @@ package com.guilhermelucas.seriesdatabase.home
 
 import android.os.Bundle
 import android.view.*
+import android.widget.Toast
 import androidx.appcompat.widget.SearchView
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.guilhermelucas.data.datasource.ShowDataSource
@@ -99,32 +101,38 @@ class HomeFragment : Fragment() {
         })
         swipeRefreshShows.setOnRefreshListener {
             viewModel.onSwipeToRefresh()
+            searchViewMenu?.collapseActionView()
         }
     }
 
     private fun setupObserver() = with(viewModel) {
         setupObserver(loadedSeries to ::loadData)
         setupObserver(isLoading to ::isLoadingObserver)
+        setupObserver(goToDetails to ::goToDetailsObserver)
         setupObserver(changeAdapterVisibility to ::changeVisibilityObserver)
+    }
+
+    private fun goToDetailsObserver(id: Int) {
+        Toast.makeText(context, "Id $id", Toast.LENGTH_SHORT).show()
     }
 
     private fun changeVisibilityObserver(state: HomeViewModel.AdapterVisibility) {
         binding?.run {
             when (state) {
                 HomeViewModel.AdapterVisibility.DATA_VIEW -> {
-                    layoutEmptyShows.visibility = View.GONE
-                    layoutEmptyShowsSearch.visibility = View.GONE
-                    recyclerViewShows.visibility = View.VISIBLE
+                    layoutEmptyShows.isVisible = false
+                    layoutEmptyShowsSearch.isVisible = false
+                    recyclerViewShows.isVisible = true
                 }
                 HomeViewModel.AdapterVisibility.SEARCH_EMPTY_VIEW -> {
-                    layoutEmptyShows.visibility = View.GONE
-                    layoutEmptyShowsSearch.visibility = View.VISIBLE
-                    recyclerViewShows.visibility = View.GONE
+                    layoutEmptyShows.isVisible = false
+                    layoutEmptyShowsSearch.isVisible = true
+                    recyclerViewShows.isVisible = false
                 }
                 else -> {
-                    layoutEmptyShows.visibility = View.VISIBLE
-                    layoutEmptyShowsSearch.visibility = View.GONE
-                    recyclerViewShows.visibility = View.GONE
+                    layoutEmptyShows.isVisible = true
+                    layoutEmptyShowsSearch.isVisible = false
+                    recyclerViewShows.isVisible = false
                 }
             }
         }

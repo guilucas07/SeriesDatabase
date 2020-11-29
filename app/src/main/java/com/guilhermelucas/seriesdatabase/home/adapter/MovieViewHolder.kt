@@ -1,5 +1,6 @@
 package com.guilhermelucas.seriesdatabase.home.adapter
 
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.guilhermelucas.seriesdatabase.databinding.AdapterMovieItemBinding
 import com.guilhermelucas.seriesdatabase.utils.extensions.loadImage
@@ -22,6 +23,11 @@ class MovieViewHolder(
             }
 
             imageMoviePoster.loadImage(movie.posterUrl)
+
+            textMovieSimilarity.isVisible = movie.similarity != null
+            if(movie.similarity != null){
+                textMovieSimilarity.text = "Score ${movie.similarity.toInt()} %"
+            }
         }
     }
 }

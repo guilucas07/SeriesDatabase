@@ -42,8 +42,6 @@ class HomeViewModel(private val repository: HomeRepository) : BaseViewModel() {
     /*****************************/
     private object Constants {
         const val SEARCH_MIN_LETTERS = 3
-        const val MAX_ITEMS_EACH_ROW_PORTRAIT = 2
-        const val MAX_ITEMS_EACH_ROW_LANDSCAPE = 3
     }
 
     private enum class ActivityMode {
@@ -57,6 +55,7 @@ class HomeViewModel(private val repository: HomeRepository) : BaseViewModel() {
     fun onItemClick(position: Int) {
         _loadedSeries.value?.getOrNull(position)?.let {
             _goToDetails.postValue(it.id)
+
         }
     }
 
@@ -122,7 +121,7 @@ class HomeViewModel(private val repository: HomeRepository) : BaseViewModel() {
             runCatching {
                 repository.searchShow(query)
             }.onSuccess { returnedList ->
-                val newList = returnedList.map { it.show.toAdapterItem() }
+                val newList = returnedList.map { it.toAdapterItem() }
                 _loadedSeries.postValue(newList)
 
                 _changeAdapterVisibility.postValue(

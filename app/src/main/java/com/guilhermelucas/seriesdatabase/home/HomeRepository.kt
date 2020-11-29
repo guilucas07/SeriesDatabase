@@ -7,7 +7,7 @@ import com.guilhermelucas.model.Show
 class HomeRepository(
     private val showDataSource: ShowDataSource
 ) {
-    private var actualPage: Int = 0
+    private var actualPage: Int = -1
 
     enum class RequestStrategy {
         FIRST_PAGE, NEXT_PAGE
@@ -16,7 +16,7 @@ class HomeRepository(
     suspend fun loadMoreData(requestStrategy: RequestStrategy = RequestStrategy.NEXT_PAGE): List<Show> {
         when (requestStrategy) {
             RequestStrategy.NEXT_PAGE -> actualPage++
-            else -> actualPage = 1
+            else -> actualPage = 0
         }
 
         return showDataSource.loadAll(actualPage)
