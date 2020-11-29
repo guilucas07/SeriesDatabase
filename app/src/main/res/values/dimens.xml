@@ -7,5 +7,5 @@
     <dimen name="fab_margin">16dp</dimen>
 
     <dimen name="activity_internal_elements_margin">8dp</dimen>
-    <dimen name="activity_internal_elements_extra_margin">14dp</dimen>
+    <dimen name="activity_internal_elements_extra_margin">16dp</dimen>
 </resources>

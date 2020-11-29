@@ -21,12 +21,11 @@
     <string name="home_empty_view_description">Use the search icon and find more information about shows already
         released
     </string>
-
     <string name="home_empty_view_search_title">No shows found for this search</string>
-    <string name="detail_error_backdrop_unavailable">Backdrop unavailable</string>
-    <string name="detail_error_poster_unavailable">Poster unavailable</string>
     <string name="promotion_ad_check_out">Check out</string>
     <string name="promotion_ad_title">Check out %1$s series</string>
     <string name="request_error_network">Connection error. Check your internet and try again</string>
     <string name="request_error_unknown">An error has occurred on connection with server. Try again later</string>
+    <string name="season_with_number">Season %d</string>
+
 </resources>

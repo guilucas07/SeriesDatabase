@@ -6,6 +6,7 @@ import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.guilhermelucas.data.datasource.ShowDataSource
 import com.guilhermelucas.data.datasource.TVMazeApi
@@ -113,7 +114,8 @@ class HomeFragment : Fragment() {
     }
 
     private fun goToDetailsObserver(id: Int) {
-        Toast.makeText(context, "Id $id", Toast.LENGTH_SHORT).show()
+        val action = HomeFragmentDirections.actionNavHomeToNavGallery(id)
+        findNavController().navigate(action)
     }
 
     private fun changeVisibilityObserver(state: HomeViewModel.AdapterVisibility) {

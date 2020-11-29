@@ -14,11 +14,11 @@
     <style name="Text.Body" parent="AppTheme">
         <item name="android:textColor">@color/md_black_1000</item>
         <item name="android:fontFamily">sans-serif</item>
-        <item name="android:textSize">14sp</item>
+        <item name="android:textSize">16sp</item>
     </style>
 
     <style name="Text.Body.Small" >
-        <item name="android:textSize">14sp</item>
+        <item name="android:textSize">12sp</item>
     </style>
 
     <style name="Text.Heading" parent="AppTheme">
