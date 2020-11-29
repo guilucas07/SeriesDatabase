@@ -4,13 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginBottom="4dp"
+    android:background="@color/md_grey_800"
     android:paddingHorizontal="@dimen/activity_internal_elements_margin"
     android:paddingVertical="@dimen/activity_internal_elements_extra_margin">
 
     <TextView
         android:id="@+id/episodeNumberText"
         style="@style/Text.Body.Small"
-        android:layout_width="wrap_content"
+        android:layout_width="20dp"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"

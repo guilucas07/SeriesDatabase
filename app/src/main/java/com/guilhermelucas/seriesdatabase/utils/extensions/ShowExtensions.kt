@@ -26,6 +26,12 @@ fun Show.toDetailsViewObject(resourceProvider: ResourceProvider): SeriesDetailVi
         genres = "",
         exhibitionDescription = "Terça as 16:00",
         summary = summary.orEmpty(),
-        seasonsList = seasons?.map { resourceProvider.getString(R.string.season_with_number, it.number) }
+        imageUrl = imageLargeUrl ?: imageUrl,
+        seasonsList = seasons?.map {
+            resourceProvider.getString(
+                R.string.season_with_number,
+                it.number
+            )
+        }
     )
 }

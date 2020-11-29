@@ -1,6 +1,7 @@
 package com.guilhermelucas.seriesdatabase.seriesdetail
 
 import com.guilhermelucas.data.datasource.ShowDataSource
+import com.guilhermelucas.model.Episode
 import com.guilhermelucas.model.Show
 
 class SeriesDetailRepository(
@@ -11,4 +12,7 @@ class SeriesDetailRepository(
         return showDataSource.searchShow(id)
     }
 
+    suspend fun getSeasonsEpisodes(seasonId : Int) : List<Episode>{
+        return showDataSource.getSeasonsEpisodes(seasonId)
+    }
 }
