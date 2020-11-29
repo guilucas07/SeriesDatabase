@@ -1,7 +1,10 @@
 package com.guilhermelucas.data.datasource
 
+import com.guilhermelucas.data.model.EpisodeResponse
+import com.guilhermelucas.data.utils.toEpisode
 import com.guilhermelucas.data.utils.toSearchShow
 import com.guilhermelucas.data.utils.toShow
+import com.guilhermelucas.model.Episode
 import com.guilhermelucas.model.SearchShow
 import com.guilhermelucas.model.Show
 
@@ -17,4 +20,12 @@ class ShowDataSource(private val tvMazeApi: TVMazeApi) {
     suspend fun searchShow(id: Int): Show {
         return tvMazeApi.searchShow(id).toShow()
     }
+
+    suspend fun getSeasonsEpisodes(id: Int): List<Episode> {
+        return tvMazeApi.seasonsEpisodes(id).map {
+            it.toEpisode()
+        }
+    }
 }
+
+

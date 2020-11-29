@@ -1,0 +1,11 @@
+package com.guilhermelucas.model
+
+data class Episode(
+    val id: Int,
+    val imageUrl: String?,
+    val name: String?,
+    val number : Int?,
+    val season : Int?,
+    val durationMinutes: Int?,
+    val summary: String?
+)

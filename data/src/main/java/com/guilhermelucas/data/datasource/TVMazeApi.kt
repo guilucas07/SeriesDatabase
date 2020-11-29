@@ -1,5 +1,6 @@
 package com.guilhermelucas.data.datasource
 
+import com.guilhermelucas.data.model.EpisodeResponse
 import com.guilhermelucas.data.model.SearchShowResponse
 import com.guilhermelucas.data.model.ShowResponse
 import com.guilhermelucas.data.model.ShowWithSeasons
@@ -17,5 +18,8 @@ interface TVMazeApi {
 
     @GET("shows/{id}?embed=seasons")
     suspend fun searchShow(@Path("id") id: Int): ShowWithSeasons
+
+    @GET("seasons/{id}/episodes")
+    suspend fun seasonsEpisodes(@Path("id") id: Int): List<EpisodeResponse>
 
 }
