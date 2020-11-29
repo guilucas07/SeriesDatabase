@@ -27,5 +27,7 @@
     <string name="request_error_network">Connection error. Check your internet and try again</string>
     <string name="request_error_unknown">An error has occurred on connection with server. Try again later</string>
     <string name="season_with_number">Season %d</string>
+    <string name="episode_duration_minutes">%d min</string>
+    <string name="episodes">Episodes</string>
 
 </resources>
