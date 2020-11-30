@@ -34,7 +34,7 @@ private fun Episode.toEpisodeDetails(resourceProvider: ResourceProvider): Episod
     return EpisodeDetailsViewObject(
         id = id,
         season = season,
-        summary = summary.orEmpty(),
+        summary = summary ?: resourceProvider.getString(R.string.episode_without_summary),
         image = imageUrl,
         airDate = formattedDate
     )

@@ -31,4 +31,6 @@
     <string name="episodes">Episodes</string>
     <string name="series_exhibition_description">%s at %s</string>
     <string name="date_format">yyyy-MM-dd</string>
+    <string name="series_without_summary">No summary for this series</string>
+    <string name="episode_without_summary">No summary</string>
 </resources>

@@ -48,7 +48,7 @@ fun Show.toDetailsViewObject(resourceProvider: ResourceProvider): SeriesDetailVi
         name = name,
         genres = genres?.joinToString(separator = " / ").orEmpty(),
         exhibitionDescription = exhibitionDescription,
-        summary = summary.orEmpty(),
+        summary = summary ?: resourceProvider.getString(R.string.series_without_summary),
         imageUrl = imageLargeUrl ?: imageUrl,
         seasonsList = seasons?.map {
             resourceProvider.getString(
