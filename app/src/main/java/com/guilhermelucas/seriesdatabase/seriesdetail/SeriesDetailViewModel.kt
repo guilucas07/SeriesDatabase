@@ -6,9 +6,9 @@ import androidx.lifecycle.viewModelScope
 import com.guilhermelucas.model.ResourceProvider
 import com.guilhermelucas.model.Show
 import com.guilhermelucas.seriesdatabase.base.BaseViewModel
-import com.guilhermelucas.seriesdatabase.seriesdetail.adapter.model.EpisodeSeriesDetailsViewObject
+import com.guilhermelucas.seriesdatabase.seriesdetail.adapter.model.EpisodeViewObject
 import com.guilhermelucas.seriesdatabase.utils.extensions.toDetailsViewObject
-import com.guilhermelucas.seriesdatabase.utils.extensions.toSeriesDetailAdapter
+import com.guilhermelucas.seriesdatabase.utils.extensions.toEpisodeViewObject
 import com.guilhermelucas.seriesdatabase.utils.models.RequestError
 import kotlinx.coroutines.launch
 
@@ -46,8 +46,8 @@ class SeriesDetailViewModel(
     val showRequestError: LiveData<RequestError>
         get() = _showRequestError
 
-    private val _seasonEpisodes = MutableLiveData<List<EpisodeSeriesDetailsViewObject>>()
-    val seasonEpisodes: LiveData<List<EpisodeSeriesDetailsViewObject>>
+    private val _seasonEpisodes = MutableLiveData<List<EpisodeViewObject>>()
+    val seasonEpisodes: LiveData<List<EpisodeViewObject>>
         get() = _seasonEpisodes
 
     private val _isLoadingSeasonEpisodes = MutableLiveData<Boolean>()
@@ -60,7 +60,7 @@ class SeriesDetailViewModel(
             runCatching {
                 repository.getSeasonsEpisodes(it.id)
             }.onSuccess { episodes ->
-                _seasonEpisodes.postValue(episodes.map { it.toSeriesDetailAdapter(resourceProvider) })
+                _seasonEpisodes.postValue(episodes.map { it.toEpisodeViewObject(resourceProvider) })
                 _isLoadingSeasonEpisodes.postValue(false)
             }.onFailure {
                 it.printStackTrace()
@@ -69,7 +69,4 @@ class SeriesDetailViewModel(
         }
     }
 
-    fun onAdapterItemClicked(position: Int) {
-
-    }
 }

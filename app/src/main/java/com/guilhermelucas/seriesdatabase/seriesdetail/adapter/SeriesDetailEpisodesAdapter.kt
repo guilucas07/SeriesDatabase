@@ -2,28 +2,34 @@ package com.guilhermelucas.seriesdatabase.seriesdetail.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.recyclerview.widget.RecyclerView
-import com.guilhermelucas.seriesdatabase.databinding.AdapterMovieItemBinding
+import com.guilhermelucas.seriesdatabase.databinding.AdapterSeasonEpisodeDetailItemBinding
 import com.guilhermelucas.seriesdatabase.databinding.AdapterSeasonEpisodeItemBinding
-import com.guilhermelucas.seriesdatabase.seriesdetail.adapter.model.EpisodeSeriesDetailsViewObject
+import com.guilhermelucas.seriesdatabase.seriesdetail.adapter.model.EpisodeDetailsViewObject
+import com.guilhermelucas.seriesdatabase.seriesdetail.adapter.model.EpisodeViewObject
+import com.guilhermelucas.seriesdatabase.seriesdetail.adapter.viewholder.EpisodeDetailsViewHolder
+import com.guilhermelucas.seriesdatabase.seriesdetail.adapter.viewholder.EpisodeViewHolder
+import com.guilhermelucas.seriesdatabase.utils.ExpandableRecyclerViewAdapter
+import kotlinx.coroutines.CoroutineScope
 
 class SeriesDetailEpisodesAdapter(
-    private val clickListener: (position: Int) -> Unit
+    coroutineScope: CoroutineScope,
+    private val items: ArrayList<EpisodeViewObject> = arrayListOf()
 ) :
-    RecyclerView.Adapter<EpisodesViewHolder>() {
+    ExpandableRecyclerViewAdapter<EpisodeDetailsViewObject,
+            EpisodeViewObject, EpisodeViewHolder, EpisodeDetailsViewHolder>(
+        items, ExpandingDirection.VERTICAL, coroutineScope
+    ) {
 
-    private val items: ArrayList<EpisodeSeriesDetailsViewObject> =
-        arrayListOf()
-
-    fun loadItems(list: List<EpisodeSeriesDetailsViewObject>) {
+    fun loadItems(list: List<EpisodeViewObject>) {
         items.clear()
         items.addAll(list)
         notifyDataSetChanged()
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EpisodesViewHolder {
-        return EpisodesViewHolder(
-            clickListener,
+    override fun getItemCount() = items.size
+
+    override fun onCreateParentViewHolder(parent: ViewGroup, viewType: Int): EpisodeViewHolder {
+        return EpisodeViewHolder(
             AdapterSeasonEpisodeItemBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
@@ -32,11 +38,49 @@ class SeriesDetailEpisodesAdapter(
         )
     }
 
-    override fun getItemCount() = items.size
+    override fun onBindParentViewHolder(
+        parentViewHolder: EpisodeViewHolder,
+        expandableType: EpisodeViewObject,
+        position: Int
+    ) {
+        parentViewHolder.bind(expandableType)
+    }
 
-    override fun onBindViewHolder(holder: EpisodesViewHolder, position: Int) {
-        items.getOrNull(position)?.let {
-            holder.bind(it)
-        }
+    override fun onCreateChildViewHolder(
+        child: ViewGroup,
+        viewType: Int
+    ): EpisodeDetailsViewHolder {
+        return EpisodeDetailsViewHolder(
+            AdapterSeasonEpisodeDetailItemBinding.inflate(
+                LayoutInflater.from(child.context),
+                child,
+                false
+            )
+        )
+    }
+
+    override fun onBindChildViewHolder(
+        childViewHolder: EpisodeDetailsViewHolder,
+        expandedType: EpisodeDetailsViewObject,
+        expandableType: EpisodeViewObject,
+        position: Int
+    ) {
+        childViewHolder.bind(expandedType)
+    }
+
+    override fun onExpandableClick(
+        expandableViewHolder: EpisodeViewHolder,
+        expandableType: EpisodeViewObject
+    ){
+        //nothing to do
+    }
+
+    override fun onExpandedClick(
+        expandableViewHolder: EpisodeViewHolder,
+        expandedViewHolder: EpisodeDetailsViewHolder,
+        expandedType: EpisodeDetailsViewObject,
+        expandableType: EpisodeViewObject
+    ){
+        //nothing to do
     }
 }

@@ -16,20 +16,23 @@ import com.guilhermelucas.data.utils.RetrofitHelper
 import com.guilhermelucas.seriesdatabase.R
 import com.guilhermelucas.seriesdatabase.databinding.FragmentSeriesDetailBinding
 import com.guilhermelucas.seriesdatabase.seriesdetail.adapter.SeriesDetailEpisodesAdapter
-import com.guilhermelucas.seriesdatabase.seriesdetail.adapter.model.EpisodeSeriesDetailsViewObject
+import com.guilhermelucas.seriesdatabase.seriesdetail.adapter.model.EpisodeViewObject
 import com.guilhermelucas.seriesdatabase.utils.AndroidResourceProvider
 import com.guilhermelucas.seriesdatabase.utils.extensions.getViewModel
 import com.guilhermelucas.seriesdatabase.utils.extensions.loadImage
 import com.guilhermelucas.seriesdatabase.utils.extensions.setupObserver
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.SupervisorJob
 
 class SeriesDetailFragment : Fragment() {
 
     private var binding: FragmentSeriesDetailBinding? = null
     private val args: SeriesDetailFragmentArgs by navArgs()
     private val adapter: SeriesDetailEpisodesAdapter by lazy {
-        SeriesDetailEpisodesAdapter { position ->
-            viewModel.onAdapterItemClicked(position)
-        }
+        SeriesDetailEpisodesAdapter(
+            CoroutineScope(SupervisorJob() + Dispatchers.Main.immediate)
+        )
     }
 
     private val viewModel: SeriesDetailViewModel by lazy {
@@ -89,11 +92,11 @@ class SeriesDetailFragment : Fragment() {
     private fun isLoadingSeasonEpisodesObserver(isVisible: Boolean) {
         binding?.run {
             seasonEpisodesProgress.isVisible = isVisible
-            seasonEpisodesRecycler.visibility = if(isVisible) View.INVISIBLE else View.VISIBLE
+            seasonEpisodesRecycler.visibility = if (isVisible) View.INVISIBLE else View.VISIBLE
         }
     }
 
-    private fun seasonEpisodesObserver(list: List<EpisodeSeriesDetailsViewObject>) {
+    private fun seasonEpisodesObserver(list: List<EpisodeViewObject>) {
         adapter.loadItems(list)
     }
 
@@ -101,7 +104,7 @@ class SeriesDetailFragment : Fragment() {
         binding?.run {
             exhibitionDetailsText.text = info.exhibitionDescription
             genresText.text = info.genres
-            summaryText.text = Html.fromHtml(info.summary)
+            summaryText.text = info.summary
             seasonsSpinner.adapter = getSeasonsAdapter(info.seasonsList)
             titleText.text = info.name
             posterImage.loadImage(info.imageUrl)

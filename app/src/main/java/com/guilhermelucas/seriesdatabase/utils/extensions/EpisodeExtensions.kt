@@ -3,10 +3,13 @@ package com.guilhermelucas.seriesdatabase.utils.extensions
 import com.guilhermelucas.model.Episode
 import com.guilhermelucas.model.ResourceProvider
 import com.guilhermelucas.seriesdatabase.R
-import com.guilhermelucas.seriesdatabase.seriesdetail.adapter.model.EpisodeSeriesDetailsViewObject
+import com.guilhermelucas.seriesdatabase.seriesdetail.adapter.model.EpisodeDetailsViewObject
+import com.guilhermelucas.seriesdatabase.seriesdetail.adapter.model.EpisodeViewObject
+import java.text.SimpleDateFormat
+import java.util.*
 
-fun Episode.toSeriesDetailAdapter(resourceProvider: ResourceProvider): EpisodeSeriesDetailsViewObject {
-    return EpisodeSeriesDetailsViewObject(
+fun Episode.toEpisodeViewObject(resourceProvider: ResourceProvider): EpisodeViewObject {
+    return EpisodeViewObject(
         id = id,
         number = number?.let { it.toString() } ?: " - ",
         name = name.orEmpty(),
@@ -15,6 +18,24 @@ fun Episode.toSeriesDetailAdapter(resourceProvider: ResourceProvider): EpisodeSe
                 R.string.episode_duration_minutes,
                 it
             )
-        }.orEmpty()
+        }.orEmpty(),
+        details = toEpisodeDetails(resourceProvider)
+    )
+}
+
+private fun Episode.toEpisodeDetails(resourceProvider: ResourceProvider): EpisodeDetailsViewObject {
+    val formattedDate = airDate?.let {
+        SimpleDateFormat(
+            resourceProvider.getString(R.string.date_format),
+            Locale.getDefault()
+        ).format(it)
+    }
+
+    return EpisodeDetailsViewObject(
+        id = id,
+        season = season,
+        summary = summary.orEmpty(),
+        image = imageUrl,
+        airDate = formattedDate
     )
 }
