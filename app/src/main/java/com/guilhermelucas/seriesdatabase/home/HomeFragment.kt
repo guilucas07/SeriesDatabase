@@ -1,8 +1,9 @@
 package com.guilhermelucas.seriesdatabase.home
 
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.*
-import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
@@ -20,9 +21,6 @@ import com.guilhermelucas.seriesdatabase.utils.extensions.setupObserver
 
 class HomeFragment : Fragment() {
 
-    private var binding: FragmentHomeBinding? = null
-    private var searchViewMenu: MenuItem? = null
-
     private val viewModel: HomeViewModel by lazy {
         getViewModel {
             HomeViewModel(
@@ -34,10 +32,18 @@ class HomeFragment : Fragment() {
             )
         }
     }
+
     private val adapter =
         HomeAdapter { position ->
             viewModel.onItemClick(position)
         }
+
+    private val searchHandler: Handler by lazy {
+        Handler(Looper.getMainLooper())
+    }
+    private var searchRunnable = Runnable { }
+    private var binding: FragmentHomeBinding? = null
+    private var searchViewMenu: MenuItem? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -55,6 +61,11 @@ class HomeFragment : Fragment() {
         initSearchMenu(menu)
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        binding = null
+    }
+
     private fun initSearchMenu(menu: Menu) {
         searchViewMenu = menu.findItem(R.id.search_action)
         val searchView = (searchViewMenu?.actionView as SearchView)
@@ -64,9 +75,10 @@ class HomeFragment : Fragment() {
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
-                if (newText != null)
-                    viewModel.searchMovie(newText)
-
+                searchHandler.scheduleSeriesSearch {
+                    if (newText != null)
+                        viewModel.searchMovie(newText)
+                }
                 return false
             }
         })
@@ -83,14 +95,17 @@ class HomeFragment : Fragment() {
         })
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        binding = null
+    private fun Handler.scheduleSeriesSearch(block: () -> Unit) {
+        removeCallbacks(searchRunnable)
+        searchRunnable = Runnable {
+            block()
+        }
+        postDelayed(searchRunnable, SEARCH_DELAY_TIME)
     }
 
     private fun FragmentHomeBinding.setupView() {
-        recyclerViewShows.adapter = adapter
-        recyclerViewShows.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+        seriesRecycler.adapter = adapter
+        seriesRecycler.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
                 val directionDown = 1
@@ -100,7 +115,7 @@ class HomeFragment : Fragment() {
                 }
             }
         })
-        swipeRefreshShows.setOnRefreshListener {
+        seriesSwipe.setOnRefreshListener {
             viewModel.onSwipeToRefresh()
             searchViewMenu?.collapseActionView()
         }
@@ -122,19 +137,19 @@ class HomeFragment : Fragment() {
         binding?.run {
             when (state) {
                 HomeViewModel.AdapterVisibility.DATA_VIEW -> {
-                    layoutEmptyShows.isVisible = false
-                    layoutEmptyShowsSearch.isVisible = false
-                    recyclerViewShows.isVisible = true
+                    emptyDataText.isVisible = false
+                    emptySearchText.isVisible = false
+                    seriesRecycler.isVisible = true
                 }
                 HomeViewModel.AdapterVisibility.SEARCH_EMPTY_VIEW -> {
-                    layoutEmptyShows.isVisible = false
-                    layoutEmptyShowsSearch.isVisible = true
-                    recyclerViewShows.isVisible = false
+                    emptyDataText.isVisible = false
+                    emptySearchText.isVisible = true
+                    seriesRecycler.isVisible = false
                 }
                 else -> {
-                    layoutEmptyShows.isVisible = true
-                    layoutEmptyShowsSearch.isVisible = false
-                    recyclerViewShows.isVisible = false
+                    emptyDataText.isVisible = true
+                    emptySearchText.isVisible = false
+                    seriesRecycler.isVisible = false
                 }
             }
         }
@@ -143,7 +158,8 @@ class HomeFragment : Fragment() {
     private fun isLoadingObserver(isVisible: Boolean) {
         binding?.run {
             if (!isVisible)
-                swipeRefreshShows.isRefreshing = isVisible
+                seriesSwipe.isRefreshing = isVisible
+            progress.isVisible = isVisible
         }
     }
 
@@ -151,8 +167,7 @@ class HomeFragment : Fragment() {
         adapter.loadItems(newData)
     }
 
-    override fun onResume() {
-        super.onResume()
-        viewModel.onResume()
+    companion object {
+        private const val SEARCH_DELAY_TIME = 500L
     }
 }
