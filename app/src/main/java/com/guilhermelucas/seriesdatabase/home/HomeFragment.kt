@@ -67,11 +67,6 @@ class HomeFragment : Fragment() {
         binding = null
     }
 
-//    override fun onResume() {
-//        super.onResume()
-//        viewModel.onResume()
-//    }
-
     private fun initSearchMenu(menu: Menu) {
         searchViewMenu = menu.findItem(R.id.search_action)
         val searchView = (searchViewMenu?.actionView as SearchView)
@@ -106,7 +101,7 @@ class HomeFragment : Fragment() {
         searchRunnable = Runnable {
             block()
         }
-        postDelayed(searchRunnable, 500)
+        postDelayed(searchRunnable, SEARCH_DELAY_TIME)
     }
 
     private fun FragmentHomeBinding.setupView() {
@@ -173,7 +168,7 @@ class HomeFragment : Fragment() {
         adapter.loadItems(newData)
     }
 
-    companion object{
+    companion object {
         private const val SEARCH_DELAY_TIME = 500L
     }
 }
