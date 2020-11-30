@@ -11,9 +11,10 @@
     <TextView
         android:id="@+id/episodeNumberText"
         style="@style/Text.Body.Small"
-        android:layout_width="20dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/activity_internal_elements_margin"
+        android:minWidth="20dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="1" />
