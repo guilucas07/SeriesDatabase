@@ -22,4 +22,8 @@
     <style name="Theme.SeriesDatabase.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="Theme.SeriesDatabase.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="Theme.SeriesDatabase.BaseText">
+        <item name="android:textColor">@color/white</item>
+    </style>
 </resources>
