@@ -1,18 +1,18 @@
 package com.guilhermelucas.seriesdatabase.seriesdetail
 
-import com.guilhermelucas.data.datasource.ShowDataSource
+import com.guilhermelucas.data.datasource.SeriesDataSource
 import com.guilhermelucas.model.Episode
-import com.guilhermelucas.model.Show
+import com.guilhermelucas.model.Series
 
 class SeriesDetailRepository(
-    private val showDataSource: ShowDataSource
+    private val seriesDataSource: SeriesDataSource
 ) {
 
-    suspend fun getShow(id: Int): Show {
-        return showDataSource.searchShow(id)
+    suspend fun getSeries(id: Int): Series {
+        return seriesDataSource.searchSeries(id)
     }
 
     suspend fun getSeasonsEpisodes(seasonId : Int) : List<Episode>{
-        return showDataSource.getSeasonsEpisodes(seasonId)
+        return seriesDataSource.getSeasonsEpisodes(seasonId)
     }
 }

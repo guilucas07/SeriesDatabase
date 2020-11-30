@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.guilhermelucas.model.ResourceProvider
-import com.guilhermelucas.model.Show
+import com.guilhermelucas.model.Series
 import com.guilhermelucas.seriesdatabase.base.BaseViewModel
 import com.guilhermelucas.seriesdatabase.seriesdetail.adapter.model.EpisodeViewObject
 import com.guilhermelucas.seriesdatabase.utils.extensions.toDetailsViewObject
@@ -18,12 +18,12 @@ class SeriesDetailViewModel(
     private val resourceProvider: ResourceProvider
 ) : BaseViewModel() {
 
-    private lateinit var loadedSeries: Show
+    private lateinit var loadedSeries: Series
 
     init {
         viewModelScope.launch {
             runCatching {
-                repository.getShow(seriesId)
+                repository.getSeries(seriesId)
             }.onSuccess {
                 loadedSeries = it
                 val basicInfo = loadedSeries.toDetailsViewObject(resourceProvider)

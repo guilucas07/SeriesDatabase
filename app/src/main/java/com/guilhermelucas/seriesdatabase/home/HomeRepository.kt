@@ -1,11 +1,11 @@
 package com.guilhermelucas.seriesdatabase.home
 
-import com.guilhermelucas.data.datasource.ShowDataSource
-import com.guilhermelucas.model.SearchShow
-import com.guilhermelucas.model.Show
+import com.guilhermelucas.data.datasource.SeriesDataSource
+import com.guilhermelucas.model.SearchSeries
+import com.guilhermelucas.model.Series
 
 class HomeRepository(
-    private val showDataSource: ShowDataSource
+    private val seriesDataSource: SeriesDataSource
 ) {
     private var actualPage: Int = -1
 
@@ -13,17 +13,17 @@ class HomeRepository(
         FIRST_PAGE, NEXT_PAGE
     }
 
-    suspend fun loadMoreData(requestStrategy: RequestStrategy = RequestStrategy.NEXT_PAGE): List<Show> {
+    suspend fun loadMoreData(requestStrategy: RequestStrategy = RequestStrategy.NEXT_PAGE): List<Series> {
         when (requestStrategy) {
             RequestStrategy.NEXT_PAGE -> actualPage++
             else -> actualPage = 0
         }
 
-        return showDataSource.loadAll(actualPage)
+        return seriesDataSource.loadAll(actualPage)
     }
 
-    suspend fun searchShow(query : String) : List<SearchShow>{
-        return showDataSource.searchShow(query)
+    suspend fun searchSeries(query : String) : List<SearchSeries>{
+        return seriesDataSource.searchSeries(query)
     }
 
 }

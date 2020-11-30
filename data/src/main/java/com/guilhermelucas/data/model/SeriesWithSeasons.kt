@@ -1,6 +1,6 @@
 package com.guilhermelucas.data.model
 
-data class ShowWithSeasons(
+data class SeriesWithSeasons(
     val _links: Links,
     val externals: Externals,
     val genres: List<String>?,

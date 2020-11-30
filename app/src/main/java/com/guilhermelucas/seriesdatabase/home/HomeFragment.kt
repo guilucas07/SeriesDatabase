@@ -9,7 +9,7 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
-import com.guilhermelucas.data.datasource.ShowDataSource
+import com.guilhermelucas.data.datasource.SeriesDataSource
 import com.guilhermelucas.data.datasource.TVMazeApi
 import com.guilhermelucas.data.utils.RetrofitHelper
 import com.guilhermelucas.seriesdatabase.R
@@ -25,7 +25,7 @@ class HomeFragment : Fragment() {
         getViewModel {
             HomeViewModel(
                 HomeRepository(
-                    ShowDataSource(
+                    SeriesDataSource(
                         RetrofitHelper.createService<TVMazeApi>("https://api.tvmaze.com/")
                     )
                 )
