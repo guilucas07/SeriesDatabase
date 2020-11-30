@@ -70,14 +70,14 @@
             android:layout_marginTop="@dimen/activity_internal_elements_margin"
             android:text="@string/episodes"
             app:layout_constraintStart_toStartOf="@+id/summaryText"
-            app:layout_constraintTop_toBottomOf="@+id/summaryText"/>
+            app:layout_constraintTop_toBottomOf="@+id/summaryText" />
 
         <Spinner
             android:id="@+id/seasonsSpinner"
             android:layout_width="wrap_content"
-            android:backgroundTint="@color/white"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/activity_internal_elements_margin"
+            android:backgroundTint="@color/white"
             app:layout_constraintBottom_toBottomOf="@+id/episodesHeaderText"
             app:layout_constraintStart_toEndOf="@+id/episodesHeaderText" />
 
@@ -98,7 +98,7 @@
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:indeterminate="true"
-            android:progressTint="@color/md_blue_600"
+            android:progressTint="@color/progress_tint"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/seasonsSpinner" />

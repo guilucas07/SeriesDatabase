@@ -144,6 +144,7 @@ class HomeFragment : Fragment() {
         binding?.run {
             if (!isVisible)
                 swipeRefreshShows.isRefreshing = isVisible
+            progress.isVisible = isVisible
         }
     }
 
