@@ -1,14 +1,12 @@
 package com.guilhermelucas.data.utils
 
 import androidx.core.net.toUri
-import com.guilhermelucas.data.model.SeasonResponse
-import com.guilhermelucas.data.model.ShowWithSeasons
-import com.guilhermelucas.model.Season
-import com.guilhermelucas.model.Show
+import com.guilhermelucas.data.model.SeriesWithSeasons
+import com.guilhermelucas.model.Series
 
-fun ShowWithSeasons.toShow(): Show {
+fun SeriesWithSeasons.toSeries(): Series {
     fun String.forceHttps(): String = toUri().buildUpon().scheme("https").toString()
-    return Show(
+    return Series(
         id = id,
         imageUrl = image?.medium?.forceHttps(),
         imageLargeUrl = image?.original?.forceHttps(),

@@ -1,6 +1,6 @@
 package com.guilhermelucas.model
 
-data class SearchShow(
+data class SearchSeries(
     val searchSimilarity: Double,
-    val show: Show
+    val series: Series
 )

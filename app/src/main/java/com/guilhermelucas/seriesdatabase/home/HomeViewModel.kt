@@ -3,7 +3,7 @@ package com.guilhermelucas.seriesdatabase.home
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.guilhermelucas.model.Show
+import com.guilhermelucas.model.Series
 import com.guilhermelucas.seriesdatabase.base.BaseViewModel
 import com.guilhermelucas.seriesdatabase.home.adapter.AdapterItem
 import com.guilhermelucas.seriesdatabase.utils.SingleLiveEvent
@@ -60,7 +60,7 @@ class HomeViewModel(private val repository: HomeRepository) : BaseViewModel() {
         if (query.length >= SEARCH_MIN_LETTERS) {
             viewModelScope.launch {
                 runCatching {
-                    repository.searchShow(query)
+                    repository.searchSeries(query)
                 }.onSuccess { returnedList ->
                     val newList = returnedList.map { it.toAdapterItem() }
                     _loadedSeries.postValue(newList)
@@ -111,7 +111,7 @@ class HomeViewModel(private val repository: HomeRepository) : BaseViewModel() {
                 repositoryRequestStrategy = repositoryRequestStrategy1
                 runCatching {
                     repository.loadMoreData(repositoryRequestStrategy)
-                }.onSuccess { listMovies: List<Show> ->
+                }.onSuccess { listMovies: List<Series> ->
                     val newList: List<AdapterItem> =
                         if (repositoryRequestStrategy1 == HomeRepository.RequestStrategy.FIRST_PAGE)
                             listMovies.map { it.toAdapterItem() }

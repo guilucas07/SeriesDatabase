@@ -1,6 +1,6 @@
 package com.guilhermelucas.model
 
-data class Show(
+data class Series(
     val id: Int,
     val name: String,
     val language: String?,

@@ -2,7 +2,7 @@ package com.guilhermelucas.data.model
 
 import com.squareup.moshi.Json
 
-data class ShowResponse(
+data class SeriesResponse(
     val _links: Links,
     val externals: Externals,
     val genres: List<String>,

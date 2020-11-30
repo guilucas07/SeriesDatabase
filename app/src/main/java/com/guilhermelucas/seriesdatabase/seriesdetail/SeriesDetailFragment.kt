@@ -1,7 +1,6 @@
 package com.guilhermelucas.seriesdatabase.seriesdetail
 
 import android.os.Bundle
-import android.text.Html
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,7 +9,7 @@ import android.widget.ArrayAdapter
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
-import com.guilhermelucas.data.datasource.ShowDataSource
+import com.guilhermelucas.data.datasource.SeriesDataSource
 import com.guilhermelucas.data.datasource.TVMazeApi
 import com.guilhermelucas.data.utils.RetrofitHelper
 import com.guilhermelucas.seriesdatabase.R
@@ -40,7 +39,7 @@ class SeriesDetailFragment : Fragment() {
             SeriesDetailViewModel(
                 args.seriesId,
                 SeriesDetailRepository(
-                    ShowDataSource(
+                    SeriesDataSource(
                         RetrofitHelper.createService<TVMazeApi>("https://api.tvmaze.com/")
                     )
                 ),

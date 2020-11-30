@@ -1,19 +1,15 @@
 package com.guilhermelucas.seriesdatabase.utils.extensions
 
 import android.os.Build
-import android.util.Log
-import androidx.annotation.RequiresApi
-import com.guilhermelucas.model.Show
+import com.guilhermelucas.model.Series
 import com.guilhermelucas.seriesdatabase.R
 import com.guilhermelucas.seriesdatabase.home.adapter.AdapterItem
 import com.guilhermelucas.seriesdatabase.seriesdetail.SeriesDetailViewObject
 import com.guilhermelucas.model.ResourceProvider
-import com.guilhermelucas.model.SeriesSchedule
-import com.guilhermelucas.seriesdatabase.BuildConfig
 import java.time.format.TextStyle
 import java.util.*
 
-fun Show.toAdapterItem(): AdapterItem {
+fun Series.toAdapterItem(): AdapterItem {
 
     return AdapterItem(
         id,
@@ -27,7 +23,7 @@ fun Show.toAdapterItem(): AdapterItem {
 }
 
 
-fun Show.toDetailsViewObject(resourceProvider: ResourceProvider): SeriesDetailViewObject {
+fun Series.toDetailsViewObject(resourceProvider: ResourceProvider): SeriesDetailViewObject {
     val exhibitionDescription =
         seriesSchedule?.joinToString(separator = "\n") {
             val displayName =
