@@ -1,6 +1,7 @@
 package com.guilhermelucas.seriesdatabase.utils.extensions
 
 import android.os.Build
+import android.util.Log
 import androidx.annotation.RequiresApi
 import com.guilhermelucas.model.Show
 import com.guilhermelucas.seriesdatabase.R
@@ -28,15 +29,20 @@ fun Show.toAdapterItem(): AdapterItem {
 
 fun Show.toDetailsViewObject(resourceProvider: ResourceProvider): SeriesDetailViewObject {
     val exhibitionDescription =
-        seriesSchedule?.map {
+        seriesSchedule?.joinToString(separator = "\n") {
             val displayName =
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                     it.dayOfWeek.getDisplayName(TextStyle.FULL, Locale.getDefault())
                 } else {
-                    it.dayOfWeek.name.capitalize(Locale.getDefault())
+                    it.dayOfWeek.name
                 }
-            resourceProvider.getString(R.string.series_exhibition_description, displayName, it.time)
-        }?.joinToString { "${it}\n" }.orEmpty()
+
+            resourceProvider.getString(
+                R.string.series_exhibition_description,
+                displayName.capitalize(Locale.getDefault()),
+                it.time
+            )
+        }.orEmpty()
 
     return SeriesDetailViewObject(
         name = name,

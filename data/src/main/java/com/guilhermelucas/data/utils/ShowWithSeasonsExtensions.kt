@@ -19,7 +19,7 @@ fun ShowWithSeasons.toShow(): Show {
         rating = rating?.average,
         runtime = runtime,
         status = status,
-        summary = summary,
+        summary = summary?.removeHtmlTags(),
         type = type,
         updated = updated,
         url = url,
@@ -27,13 +27,5 @@ fun ShowWithSeasons.toShow(): Show {
         seasons = _embedded.seasons.map { it.toSeason() },
         genres = genres,
         seriesSchedule = schedule?.toSchedule()
-    )
-}
-
-fun SeasonResponse.toSeason(): Season {
-    return Season(
-        id = id,
-        number = number,
-        totalEpisodes = episodeOrder
     )
 }
