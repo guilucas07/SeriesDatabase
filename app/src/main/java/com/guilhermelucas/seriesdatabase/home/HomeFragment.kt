@@ -122,10 +122,17 @@ class HomeFragment : Fragment() {
     }
 
     private fun setupObserver() = with(viewModel) {
-        setupObserver(loadedSeries to ::loadData)
+        setupObserver(loadedSeries to ::loadSeriesObserver)
         setupObserver(isLoading to ::isLoadingObserver)
         setupObserver(goToDetails to ::goToDetailsObserver)
         setupObserver(changeAdapterVisibility to ::changeVisibilityObserver)
+        setupObserver(scrollToPosition to ::scrollPositionObserver)
+    }
+
+    private fun scrollPositionObserver(position: Int) {
+        binding?.run {
+            seriesRecycler.scrollToPosition(position)
+        }
     }
 
     private fun goToDetailsObserver(id: Int) {
@@ -163,7 +170,7 @@ class HomeFragment : Fragment() {
         }
     }
 
-    private fun loadData(newData: List<AdapterItem>) {
+    private fun loadSeriesObserver(newData: List<AdapterItem>) {
         adapter.loadItems(newData)
     }
 

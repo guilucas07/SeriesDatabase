@@ -40,6 +40,10 @@ class HomeViewModel(private val repository: HomeRepository) : BaseViewModel() {
     val showRequestError: LiveData<RequestError>
         get() = _showRequestError
 
+    private val _scrollToPosition = SingleLiveEvent<Int>()
+    val scrollToPosition: LiveData<Int>
+        get() = _scrollToPosition
+
     private var repositoryRequestStrategy =
         HomeRepository.RequestStrategy.FIRST_PAGE
 
@@ -67,7 +71,7 @@ class HomeViewModel(private val repository: HomeRepository) : BaseViewModel() {
                         else
                             AdapterVisibility.SEARCH_EMPTY_VIEW
                     )
-
+                    _scrollToPosition.postValue(0)
                     activityMode = ActivityMode.SEARCH
                 }.onFailure {
                     activityMode = ActivityMode.DEFAULT
