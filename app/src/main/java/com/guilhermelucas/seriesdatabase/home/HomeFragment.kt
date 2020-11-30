@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.view.*
-import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
@@ -105,8 +104,8 @@ class HomeFragment : Fragment() {
     }
 
     private fun FragmentHomeBinding.setupView() {
-        recyclerViewShows.adapter = adapter
-        recyclerViewShows.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+        seriesRecycler.adapter = adapter
+        seriesRecycler.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
                 val directionDown = 1
@@ -116,7 +115,7 @@ class HomeFragment : Fragment() {
                 }
             }
         })
-        swipeRefreshShows.setOnRefreshListener {
+        seriesSwipe.setOnRefreshListener {
             viewModel.onSwipeToRefresh()
             searchViewMenu?.collapseActionView()
         }
@@ -138,19 +137,19 @@ class HomeFragment : Fragment() {
         binding?.run {
             when (state) {
                 HomeViewModel.AdapterVisibility.DATA_VIEW -> {
-                    layoutEmptyShows.isVisible = false
-                    layoutEmptyShowsSearch.isVisible = false
-                    recyclerViewShows.isVisible = true
+                    emptyDataText.isVisible = false
+                    emptySearchText.isVisible = false
+                    seriesRecycler.isVisible = true
                 }
                 HomeViewModel.AdapterVisibility.SEARCH_EMPTY_VIEW -> {
-                    layoutEmptyShows.isVisible = false
-                    layoutEmptyShowsSearch.isVisible = true
-                    recyclerViewShows.isVisible = false
+                    emptyDataText.isVisible = false
+                    emptySearchText.isVisible = true
+                    seriesRecycler.isVisible = false
                 }
                 else -> {
-                    layoutEmptyShows.isVisible = true
-                    layoutEmptyShowsSearch.isVisible = false
-                    recyclerViewShows.isVisible = false
+                    emptyDataText.isVisible = true
+                    emptySearchText.isVisible = false
+                    seriesRecycler.isVisible = false
                 }
             }
         }
@@ -159,7 +158,7 @@ class HomeFragment : Fragment() {
     private fun isLoadingObserver(isVisible: Boolean) {
         binding?.run {
             if (!isVisible)
-                swipeRefreshShows.isRefreshing = isVisible
+                seriesSwipe.isRefreshing = isVisible
             progress.isVisible = isVisible
         }
     }

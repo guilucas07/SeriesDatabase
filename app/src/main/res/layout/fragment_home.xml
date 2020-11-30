@@ -7,7 +7,7 @@
     android:background="@color/md_blue_grey_800">
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-        android:id="@+id/swipeRefreshShows"
+        android:id="@+id/seriesSwipe"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -19,55 +19,34 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <RelativeLayout
-                android:id="@+id/layoutEmptyShows"
+            <TextView
+                android:id="@+id/emptySearchText"
+                style="@style/Text.Heading.Large"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:gravity="center"
                 android:padding="@dimen/activity_internal_elements_margin"
-                android:visibility="gone">
+                android:text="@string/home_empty_view_search_title"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-                <TextView
-                    android:id="@+id/textEmptyViewTitle"
-                    style="@style/Text.Heading.Large"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="@string/home_empty_view_title"
-                    android:textColor="@color/md_white_1000" />
-
-                <TextView
-                    android:id="@+id/textEmptyViewDescription"
-                    style="@style/Text.Heading.Small"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/textEmptyViewTitle"
-                    android:layout_marginTop="@dimen/activity_internal_elements_extra_margin"
-                    android:gravity="center"
-                    android:text="@string/home_empty_view_description"
-                    android:textColor="@color/md_white_1000" />
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:id="@+id/layoutEmptyShowsSearch"
+            <TextView
+                android:id="@+id/emptyDataText"
+                style="@style/Text.Heading.Large"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:gravity="center"
                 android:padding="@dimen/activity_internal_elements_margin"
-                android:visibility="gone">
-
-                <TextView
-                    style="@style/Text.Heading.Large"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="@string/home_empty_view_search_title"
-                    android:textColor="@color/md_white_1000" />
-
-            </RelativeLayout>
+                android:text="@string/home_empty_view_title"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerViewShows"
+                android:id="@+id/seriesRecycler"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:clipToPadding="true"
@@ -77,6 +56,7 @@
                 app:spanCount="2"
                 tools:itemCount="10"
                 tools:listitem="@layout/adapter_movie_item" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
@@ -91,4 +71,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
