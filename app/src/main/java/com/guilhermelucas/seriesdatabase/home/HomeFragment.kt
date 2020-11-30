@@ -1,6 +1,8 @@
 package com.guilhermelucas.seriesdatabase.home
 
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.*
 import android.widget.Toast
 import androidx.appcompat.widget.SearchView
@@ -20,9 +22,6 @@ import com.guilhermelucas.seriesdatabase.utils.extensions.setupObserver
 
 class HomeFragment : Fragment() {
 
-    private var binding: FragmentHomeBinding? = null
-    private var searchViewMenu: MenuItem? = null
-
     private val viewModel: HomeViewModel by lazy {
         getViewModel {
             HomeViewModel(
@@ -34,10 +33,18 @@ class HomeFragment : Fragment() {
             )
         }
     }
+
     private val adapter =
         HomeAdapter { position ->
             viewModel.onItemClick(position)
         }
+
+    private val searchHandler: Handler by lazy {
+        Handler(Looper.getMainLooper())
+    }
+    private var searchRunnable = Runnable { }
+    private var binding: FragmentHomeBinding? = null
+    private var searchViewMenu: MenuItem? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -55,6 +62,16 @@ class HomeFragment : Fragment() {
         initSearchMenu(menu)
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        binding = null
+    }
+
+//    override fun onResume() {
+//        super.onResume()
+//        viewModel.onResume()
+//    }
+
     private fun initSearchMenu(menu: Menu) {
         searchViewMenu = menu.findItem(R.id.search_action)
         val searchView = (searchViewMenu?.actionView as SearchView)
@@ -64,9 +81,10 @@ class HomeFragment : Fragment() {
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
-                if (newText != null)
-                    viewModel.searchMovie(newText)
-
+                searchHandler.scheduleSeriesSearch {
+                    if (newText != null)
+                        viewModel.searchMovie(newText)
+                }
                 return false
             }
         })
@@ -83,9 +101,12 @@ class HomeFragment : Fragment() {
         })
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        binding = null
+    private fun Handler.scheduleSeriesSearch(block: () -> Unit) {
+        removeCallbacks(searchRunnable)
+        searchRunnable = Runnable {
+            block()
+        }
+        postDelayed(searchRunnable, 500)
     }
 
     private fun FragmentHomeBinding.setupView() {
@@ -152,8 +173,7 @@ class HomeFragment : Fragment() {
         adapter.loadItems(newData)
     }
 
-    override fun onResume() {
-        super.onResume()
-        viewModel.onResume()
+    companion object{
+        private const val SEARCH_DELAY_TIME = 500L
     }
 }

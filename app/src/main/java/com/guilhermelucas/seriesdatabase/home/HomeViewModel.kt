@@ -17,6 +17,13 @@ class HomeViewModel(private val repository: HomeRepository) : BaseViewModel() {
         EMPTY_VIEW, SEARCH_EMPTY_VIEW, DATA_VIEW
     }
 
+    private enum class ActivityMode {
+        DEFAULT, SEARCH
+    }
+
+    private var activityMode =
+        ActivityMode.DEFAULT
+
     private val _loadedSeries = MutableLiveData<List<AdapterItem>>()
     val loadedSeries: LiveData<List<AdapterItem>>
         get() = _loadedSeries
@@ -33,36 +40,47 @@ class HomeViewModel(private val repository: HomeRepository) : BaseViewModel() {
     val showRequestError: LiveData<RequestError>
         get() = _showRequestError
 
-    private var activityMode =
-        ActivityMode.DEFAULT
     private var repositoryRequestStrategy =
         HomeRepository.RequestStrategy.FIRST_PAGE
 
-    /*****************************/
-    /**     Private objects     **/
-    /*****************************/
-    private object Constants {
-        const val SEARCH_MIN_LETTERS = 3
-    }
-
-    private enum class ActivityMode {
-        DEFAULT, SEARCH
-    }
-
-    fun onResume() {
+    init {
         tryLoadMoreItems()
+    }
+
+    fun onAllItemsAreShowed() {
+        tryLoadMoreItems()
+    }
+
+
+    fun searchMovie(query: String) {
+        if (query.length >= SEARCH_MIN_LETTERS) {
+            viewModelScope.launch {
+                runCatching {
+                    repository.searchShow(query)
+                }.onSuccess { returnedList ->
+                    val newList = returnedList.map { it.toAdapterItem() }
+                    _loadedSeries.postValue(newList)
+
+                    _changeAdapterVisibility.postValue(
+                        if (newList.isNotEmpty())
+                            AdapterVisibility.DATA_VIEW
+                        else
+                            AdapterVisibility.SEARCH_EMPTY_VIEW
+                    )
+
+                    activityMode = ActivityMode.SEARCH
+                }.onFailure {
+                    activityMode = ActivityMode.DEFAULT
+                    _showRequestError.postValue(handleThrowable(it))
+                }
+            }
+        }
     }
 
     fun onItemClick(position: Int) {
         _loadedSeries.value?.getOrNull(position)?.let {
             _goToDetails.postValue(it.id)
 
-        }
-    }
-
-    private fun tryLoadMoreItems() {
-        if (activityMode == ActivityMode.DEFAULT) {
-            loadItems(HomeRepository.RequestStrategy.NEXT_PAGE)
         }
     }
 
@@ -75,9 +93,11 @@ class HomeViewModel(private val repository: HomeRepository) : BaseViewModel() {
         return true
     }
 
-    /****************************/
-    /**     private methods    **/
-    /****************************/
+    private fun tryLoadMoreItems() {
+        if (activityMode == ActivityMode.DEFAULT) {
+            loadItems(HomeRepository.RequestStrategy.NEXT_PAGE)
+        }
+    }
 
     private fun loadItems(repositoryRequestStrategy1: HomeRepository.RequestStrategy) =
         viewModelScope.launch {
@@ -113,31 +133,8 @@ class HomeViewModel(private val repository: HomeRepository) : BaseViewModel() {
             }
         }
 
-    fun onAllItemsAreShowed() {
-        tryLoadMoreItems()
+    companion object {
+        private const val SEARCH_MIN_LETTERS = 3
     }
 
-    fun searchMovie(query: String) = viewModelScope.launch {
-        if (query.length >= Constants.SEARCH_MIN_LETTERS) {
-            runCatching {
-                repository.searchShow(query)
-            }.onSuccess { returnedList ->
-                val newList = returnedList.map { it.toAdapterItem() }
-                _loadedSeries.postValue(newList)
-
-                _changeAdapterVisibility.postValue(
-                    if (newList.isNotEmpty())
-                        AdapterVisibility.DATA_VIEW
-                    else
-                        AdapterVisibility.SEARCH_EMPTY_VIEW
-                )
-
-                activityMode = ActivityMode.SEARCH
-            }.onFailure {
-                activityMode = ActivityMode.DEFAULT
-                _showRequestError.postValue(handleThrowable(it))
-            }
-
-        }
-    }
 }
