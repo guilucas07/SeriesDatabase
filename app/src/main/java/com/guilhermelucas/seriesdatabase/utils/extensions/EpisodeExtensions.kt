@@ -27,7 +27,7 @@ private fun Episode.toEpisodeDetails(resourceProvider: ResourceProvider): Episod
     val formattedDate = airDate?.let {
         SimpleDateFormat(
             resourceProvider.getString(R.string.date_format),
-            Locale.getDefault()
+            Locale.US
         ).format(it)
     }
 

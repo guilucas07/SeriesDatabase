@@ -32,14 +32,14 @@ fun Show.toDetailsViewObject(resourceProvider: ResourceProvider): SeriesDetailVi
         seriesSchedule?.joinToString(separator = "\n") {
             val displayName =
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                    it.dayOfWeek.getDisplayName(TextStyle.FULL, Locale.getDefault())
+                    it.dayOfWeek.getDisplayName(TextStyle.FULL, Locale.US)
                 } else {
                     it.dayOfWeek.name
                 }
 
             resourceProvider.getString(
                 R.string.series_exhibition_description,
-                displayName.capitalize(Locale.getDefault()),
+                displayName.capitalize(Locale.US),
                 it.time
             )
         }.orEmpty()
