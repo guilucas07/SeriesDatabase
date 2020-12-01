@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/md_blue_grey_700"
+    android:background="?attr/backgroundColor"
     android:padding="@dimen/activity_internal_elements_margin">
 
     <TextView
@@ -12,6 +12,7 @@
         style="@style/Text.Caption.Large"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textColor="?attr/colorOnBackground"
         android:layout_marginTop="@dimen/activity_internal_elements_margin"
         android:text="@string/episodes"
         app:layout_constraintStart_toStartOf="parent"

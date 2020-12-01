@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="4dp"
-    android:background="@color/md_grey_800"
+    android:background="?attr/cardBackgroundColor"
     android:paddingVertical="@dimen/activity_internal_elements_extra_margin">
 
     <TextView
