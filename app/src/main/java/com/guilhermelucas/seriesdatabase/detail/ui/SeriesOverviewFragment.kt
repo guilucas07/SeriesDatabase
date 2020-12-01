@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.ViewModelProvider
 import com.guilhermelucas.seriesdatabase.databinding.FragmentSeriesOverviewBinding
 import com.guilhermelucas.seriesdatabase.detail.SeriesDetailViewModel
 import com.guilhermelucas.seriesdatabase.detail.model.SeriesDetailViewObject
@@ -14,7 +15,11 @@ import com.guilhermelucas.seriesdatabase.utils.extensions.setupObserver
 class SeriesOverviewFragment : Fragment() {
 
     private var binding: FragmentSeriesOverviewBinding? = null
-    private val viewModel: SeriesDetailViewModel by activityViewModels()
+
+    private val viewModel: SeriesDetailViewModel by lazy {
+        ViewModelProvider(requireActivity()).get(SeriesDetailViewModel::class.java)
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,

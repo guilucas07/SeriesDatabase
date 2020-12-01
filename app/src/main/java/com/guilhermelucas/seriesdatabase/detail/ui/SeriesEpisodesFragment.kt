@@ -9,6 +9,7 @@ import android.widget.ArrayAdapter
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.ViewModelProvider
 import com.guilhermelucas.seriesdatabase.R
 import com.guilhermelucas.seriesdatabase.databinding.FragmentSeriesEpisodesBinding
 import com.guilhermelucas.seriesdatabase.detail.SeriesDetailViewModel
@@ -29,7 +30,9 @@ class SeriesEpisodesFragment : Fragment() {
         )
     }
 
-    private val viewModel: SeriesDetailViewModel by activityViewModels()
+    private val viewModel: SeriesDetailViewModel by lazy {
+        ViewModelProvider(requireActivity()).get(SeriesDetailViewModel::class.java)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
