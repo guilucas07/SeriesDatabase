@@ -18,5 +18,5 @@ data class Series(
     val rating: Double?,
     val genres: List<String>? = null,
     val seasons: List<Season>? = null,
-    val seriesSchedule: List<SeriesSchedule>? = null
+    val seriesSchedule: SeriesSchedule? = null
 )
