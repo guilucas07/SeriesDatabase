@@ -11,7 +11,7 @@ import java.util.*
 fun Episode.toEpisodeViewObject(resourceProvider: ResourceProvider): EpisodeViewObject {
     return EpisodeViewObject(
         id = id,
-        number = number?.let { it.toString() } ?: " - ",
+        number = number?.toString() ?: " - ",
         name = name.orEmpty(),
         duration = durationMinutes?.let {
             resourceProvider.getString(

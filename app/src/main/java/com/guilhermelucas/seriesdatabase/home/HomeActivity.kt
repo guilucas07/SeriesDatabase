@@ -8,14 +8,12 @@ import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.core.view.isVisible
-import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.guilhermelucas.data.datasource.SeriesDataSource
 import com.guilhermelucas.data.utils.RetrofitHelper
 import com.guilhermelucas.seriesdatabase.BuildConfig
 import com.guilhermelucas.seriesdatabase.R
 import com.guilhermelucas.seriesdatabase.databinding.ActivityMainBinding
-import com.guilhermelucas.seriesdatabase.databinding.ContentMainBinding
 import com.guilhermelucas.seriesdatabase.detail.SeriesDetailActivity
 import com.guilhermelucas.seriesdatabase.home.adapter.AdapterItem
 import com.guilhermelucas.seriesdatabase.home.adapter.HomeAdapter
@@ -23,19 +21,8 @@ import com.guilhermelucas.seriesdatabase.utils.extensions.getViewModel
 import com.guilhermelucas.seriesdatabase.utils.extensions.setupObserver
 
 class HomeActivity : AppCompatActivity() {
+
     private lateinit var binding: ActivityMainBinding
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-        setupView()
-        setupObserver()
-    }
-
-    private fun setupToolbar() = with(binding) {
-        setSupportActionBar(appBarMain.toolbar)
-    }
-
     private val viewModel: HomeViewModel by lazy {
         getViewModel {
             HomeViewModel(
@@ -59,11 +46,23 @@ class HomeActivity : AppCompatActivity() {
     private var searchRunnable = Runnable { }
     private var searchViewMenu: MenuItem? = null
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        setupView()
+        setupObserver()
+    }
+
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.main, menu)
         if (menu != null)
             initSearchMenu(menu)
         return true
+    }
+
+    private fun setupToolbar() = with(binding) {
+        setSupportActionBar(appBarMain.toolbar)
     }
 
     private fun initSearchMenu(menu: Menu) {
