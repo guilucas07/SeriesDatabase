@@ -14,7 +14,7 @@ import kotlinx.coroutines.launch
 class HomeViewModel(private val repository: HomeRepository) : BaseViewModel() {
 
     enum class AdapterVisibility {
-        EMPTY_VIEW, SEARCH_EMPTY_VIEW, DATA_VIEW
+        EMPTY_VIEW, SEARCH_EMPTY_VIEW, DATA_VIEW, SHIMMER_LOADING
     }
 
     private enum class ActivityMode {
@@ -48,13 +48,12 @@ class HomeViewModel(private val repository: HomeRepository) : BaseViewModel() {
         HomeRepository.RequestStrategy.FIRST_PAGE
 
     init {
-        tryLoadMoreItems()
+        loadItems(HomeRepository.RequestStrategy.FIRST_PAGE)
     }
 
     fun onAllItemsAreShowed() {
         tryLoadMoreItems()
     }
-
 
     fun searchMovie(query: String) {
         if (query.length >= SEARCH_MIN_LETTERS) {
@@ -84,7 +83,6 @@ class HomeViewModel(private val repository: HomeRepository) : BaseViewModel() {
     fun onItemClick(position: Int) {
         _loadedSeries.value?.getOrNull(position)?.let {
             _goToDetails.postValue(it.id)
-
         }
     }
 
@@ -107,8 +105,10 @@ class HomeViewModel(private val repository: HomeRepository) : BaseViewModel() {
         viewModelScope.launch {
             if (isLoading.value != true) {
                 showLoading()
-
                 repositoryRequestStrategy = repositoryRequestStrategy1
+                if (repositoryRequestStrategy == HomeRepository.RequestStrategy.FIRST_PAGE)
+                    _changeAdapterVisibility.value = AdapterVisibility.SHIMMER_LOADING
+
                 runCatching {
                     repository.loadMoreData(repositoryRequestStrategy)
                 }.onSuccess { listMovies: List<Series> ->

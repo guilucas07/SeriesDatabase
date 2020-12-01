@@ -16,6 +16,7 @@ ext {
     coreTestingVersion = '2.1.0'
     moshiVersion = '2.3.0'
     swipeRefreshVersion = '1.1.0'
+    facebookShimmerVersion = '0.5.0'
 
     retrofit = [
             retrofit      : "com.squareup.retrofit2:retrofit:$retrofitVersion",
@@ -36,22 +37,26 @@ ext {
     ]
 
     glide = [
-            glideVersion: "com.github.bumptech.glide:glide:$glideVersion"
-
+            glideVersion    : "com.github.bumptech.glide:glide:$glideVersion"
     ]
+
+    layoutShimmer = [
+            facebookShimmer : "com.facebook.shimmer:shimmer:$facebookShimmerVersion"
+    ]
+
     glideCompiler = [
-            glideCompiler: "com.github.bumptech.glide:compiler:$glideVersion"
+            glideCompiler   : "com.github.bumptech.glide:compiler:$glideVersion"
     ]
 
     androidTest = [
-            runner  : "androidx.test:runner:$runnerVersion",
-            espresso: "com.android.support.test.espresso:espresso-core:$expressoVersion"
+            runner          : "androidx.test:runner:$runnerVersion",
+            espresso        : "com.android.support.test.espresso:espresso-core:$expressoVersion"
     ]
 
     unitTest = [
-            junit      : "junit:junit:$jUnitVersion",
-            mock       : "org.mockito:mockito-core:$mockitoVersion",
-            coreTesting: "androidx.arch.core:core-testing:$coreTestingVersion"
+            junit           : "junit:junit:$jUnitVersion",
+            mock            : "org.mockito:mockito-core:$mockitoVersion",
+            coreTesting     : "androidx.arch.core:core-testing:$coreTestingVersion"
     ]
 
 }

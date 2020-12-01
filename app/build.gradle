@@ -50,6 +50,7 @@ dependencies {
 
     implementation androidSupport.values()
     implementation retrofit.values()
+    implementation layoutShimmer.values()
 
     testImplementation unitTest.values()
     testImplementation group: 'org.mockito', name: 'mockito-inline', version: mockitoVersion

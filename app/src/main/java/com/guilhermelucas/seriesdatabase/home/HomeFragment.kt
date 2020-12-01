@@ -147,17 +147,45 @@ class HomeFragment : Fragment() {
                     emptyDataText.isVisible = false
                     emptySearchText.isVisible = false
                     seriesRecycler.isVisible = true
+                    disableShimmer()
                 }
                 HomeViewModel.AdapterVisibility.SEARCH_EMPTY_VIEW -> {
                     emptyDataText.isVisible = false
                     emptySearchText.isVisible = true
                     seriesRecycler.isVisible = false
+                    disableShimmer()
+                }
+                HomeViewModel.AdapterVisibility.SHIMMER_LOADING -> {
+                    emptyDataText.isVisible = false
+                    emptySearchText.isVisible = false
+                    seriesRecycler.isVisible = false
+                    enableShimmer()
                 }
                 else -> {
                     emptyDataText.isVisible = true
                     emptySearchText.isVisible = false
                     seriesRecycler.isVisible = false
+                    disableShimmer()
                 }
+            }
+        }
+    }
+
+    private fun disableShimmer() {
+        controlShimmer(false)
+    }
+
+    private fun enableShimmer() {
+        controlShimmer(true)
+    }
+
+    private fun controlShimmer(isVisible: Boolean) {
+        binding?.loadingShimmer?.run {
+            this.isVisible = isVisible
+            if (isVisible)
+                startShimmer()
+            else {
+                stopShimmer()
             }
         }
     }
@@ -166,7 +194,7 @@ class HomeFragment : Fragment() {
         binding?.run {
             if (!isVisible)
                 seriesSwipe.isRefreshing = isVisible
-            progress.isVisible = isVisible
+            progress.isVisible = false
         }
     }
 
