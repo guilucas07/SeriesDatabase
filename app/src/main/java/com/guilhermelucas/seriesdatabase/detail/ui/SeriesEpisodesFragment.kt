@@ -87,6 +87,7 @@ class SeriesEpisodesFragment : Fragment() {
     private fun setupInformation(series: SeriesDetailViewObject) {
         binding?.seasonsSpinner?.run {
             adapter = getSeasonsAdapter(series.seasonsList)
+            isVisible = series.seasonsList?.size ?: 0 > 1
         }
     }
 
