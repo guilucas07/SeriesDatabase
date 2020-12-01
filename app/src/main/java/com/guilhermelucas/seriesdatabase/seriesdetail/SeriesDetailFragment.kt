@@ -12,6 +12,7 @@ import androidx.navigation.fragment.navArgs
 import com.guilhermelucas.data.datasource.SeriesDataSource
 import com.guilhermelucas.data.datasource.TVMazeApi
 import com.guilhermelucas.data.utils.RetrofitHelper
+import com.guilhermelucas.seriesdatabase.BuildConfig
 import com.guilhermelucas.seriesdatabase.R
 import com.guilhermelucas.seriesdatabase.databinding.FragmentSeriesDetailBinding
 import com.guilhermelucas.seriesdatabase.seriesdetail.adapter.SeriesDetailEpisodesAdapter
@@ -40,7 +41,7 @@ class SeriesDetailFragment : Fragment() {
                 args.seriesId,
                 SeriesDetailRepository(
                     SeriesDataSource(
-                        RetrofitHelper.createService<TVMazeApi>("https://api.tvmaze.com/")
+                        RetrofitHelper.createService<TVMazeApi>(BuildConfig.API_TV_MAZE)
                     )
                 ),
                 AndroidResourceProvider(requireContext())

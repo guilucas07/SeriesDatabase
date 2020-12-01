@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.guilhermelucas.data.datasource.SeriesDataSource
 import com.guilhermelucas.data.datasource.TVMazeApi
 import com.guilhermelucas.data.utils.RetrofitHelper
+import com.guilhermelucas.seriesdatabase.BuildConfig
 import com.guilhermelucas.seriesdatabase.R
 import com.guilhermelucas.seriesdatabase.databinding.FragmentHomeBinding
 import com.guilhermelucas.seriesdatabase.home.adapter.AdapterItem
@@ -26,7 +27,7 @@ class HomeFragment : Fragment() {
             HomeViewModel(
                 HomeRepository(
                     SeriesDataSource(
-                        RetrofitHelper.createService<TVMazeApi>("https://api.tvmaze.com/")
+                        RetrofitHelper.createService<TVMazeApi>(BuildConfig.API_TV_MAZE)
                     )
                 )
             )
