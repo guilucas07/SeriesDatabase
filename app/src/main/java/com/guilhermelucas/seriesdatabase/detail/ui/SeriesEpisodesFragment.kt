@@ -8,7 +8,6 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
 import com.guilhermelucas.seriesdatabase.R
 import com.guilhermelucas.seriesdatabase.databinding.FragmentSeriesEpisodesBinding
@@ -20,6 +19,7 @@ import com.guilhermelucas.seriesdatabase.utils.extensions.setupObserver
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
+import org.koin.android.viewmodel.ext.android.sharedViewModel
 
 class SeriesEpisodesFragment : Fragment() {
 
@@ -30,9 +30,7 @@ class SeriesEpisodesFragment : Fragment() {
         )
     }
 
-    private val viewModel: SeriesDetailViewModel by lazy {
-        ViewModelProvider(requireActivity()).get(SeriesDetailViewModel::class.java)
-    }
+    private val viewModel: SeriesDetailViewModel by sharedViewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater,
