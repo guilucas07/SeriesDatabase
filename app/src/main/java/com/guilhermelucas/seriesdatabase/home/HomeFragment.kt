@@ -194,7 +194,6 @@ class HomeFragment : Fragment() {
         binding?.run {
             if (!isVisible)
                 seriesSwipe.isRefreshing = isVisible
-            progress.isVisible = false
         }
     }
 
