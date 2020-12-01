@@ -1,8 +1,7 @@
-package com.guilhermelucas.seriesdatabase.seriesdetail.adapter.viewholder
+package com.guilhermelucas.seriesdatabase.detail.ui.adapter.viewholder
 
-import android.text.Html
 import com.guilhermelucas.seriesdatabase.databinding.AdapterSeasonEpisodeDetailItemBinding
-import com.guilhermelucas.seriesdatabase.seriesdetail.adapter.model.EpisodeDetailsViewObject
+import com.guilhermelucas.seriesdatabase.detail.ui.adapter.model.EpisodeDetailsViewObject
 import com.guilhermelucas.seriesdatabase.utils.ExpandableRecyclerViewAdapter
 import com.guilhermelucas.seriesdatabase.utils.extensions.loadImage
 

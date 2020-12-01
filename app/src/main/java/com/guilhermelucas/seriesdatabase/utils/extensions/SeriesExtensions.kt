@@ -4,7 +4,7 @@ import android.os.Build
 import com.guilhermelucas.model.Series
 import com.guilhermelucas.seriesdatabase.R
 import com.guilhermelucas.seriesdatabase.home.adapter.AdapterItem
-import com.guilhermelucas.seriesdatabase.seriesdetail.SeriesDetailViewObject
+import com.guilhermelucas.seriesdatabase.detail.model.SeriesDetailViewObject
 import com.guilhermelucas.model.ResourceProvider
 import java.time.format.TextStyle
 import java.util.*
@@ -41,6 +41,7 @@ fun Series.toDetailsViewObject(resourceProvider: ResourceProvider): SeriesDetail
         }.orEmpty()
 
     return SeriesDetailViewObject(
+        id = id,
         name = name,
         genres = genres?.joinToString(separator = " / ").orEmpty(),
         exhibitionDescription = exhibitionDescription,

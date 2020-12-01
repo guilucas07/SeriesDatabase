@@ -1,4 +1,4 @@
-package com.guilhermelucas.seriesdatabase.seriesdetail.adapter.model
+package com.guilhermelucas.seriesdatabase.detail.ui.adapter.model
 
 data class EpisodeDetailsViewObject(
     val id: Int,

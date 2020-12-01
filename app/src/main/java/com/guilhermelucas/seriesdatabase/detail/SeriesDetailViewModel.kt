@@ -1,4 +1,4 @@
-package com.guilhermelucas.seriesdatabase.seriesdetail
+package com.guilhermelucas.seriesdatabase.detail
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -6,7 +6,9 @@ import androidx.lifecycle.viewModelScope
 import com.guilhermelucas.model.ResourceProvider
 import com.guilhermelucas.model.Series
 import com.guilhermelucas.seriesdatabase.base.BaseViewModel
-import com.guilhermelucas.seriesdatabase.seriesdetail.adapter.model.EpisodeViewObject
+import com.guilhermelucas.seriesdatabase.detail.ui.adapter.model.EpisodeViewObject
+import com.guilhermelucas.seriesdatabase.detail.data.SeriesDetailRepository
+import com.guilhermelucas.seriesdatabase.detail.model.SeriesDetailViewObject
 import com.guilhermelucas.seriesdatabase.utils.extensions.toDetailsViewObject
 import com.guilhermelucas.seriesdatabase.utils.extensions.toEpisodeViewObject
 import com.guilhermelucas.seriesdatabase.utils.models.RequestError
@@ -18,7 +20,7 @@ class SeriesDetailViewModel(
     private val resourceProvider: ResourceProvider
 ) : BaseViewModel() {
 
-    private lateinit var loadedSeries: Series
+    private var loadedSeries: Series? = null
 
     init {
         viewModelScope.launch {
@@ -26,10 +28,10 @@ class SeriesDetailViewModel(
                 repository.getSeries(seriesId)
             }.onSuccess {
                 loadedSeries = it
-                val basicInfo = loadedSeries.toDetailsViewObject(resourceProvider)
+                val basicInfo = loadedSeries?.toDetailsViewObject(resourceProvider)
                 _seriesBasicInfo.postValue(basicInfo)
 
-                if (loadedSeries.seasons?.size != 0)
+                if (loadedSeries?.seasons?.size != 0)
                     onSpinnerSeasonUpdated(0)
 
             }.onFailure {
@@ -56,7 +58,7 @@ class SeriesDetailViewModel(
 
     fun onSpinnerSeasonUpdated(position: Int) = viewModelScope.launch {
         _isLoadingSeasonEpisodes.postValue(true)
-        loadedSeries.seasons?.getOrNull(position)?.let {
+        loadedSeries?.seasons?.getOrNull(position)?.let {
             runCatching {
                 repository.getSeasonsEpisodes(it.id)
             }.onSuccess { episodes ->

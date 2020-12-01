@@ -7,7 +7,6 @@ import android.view.*
 import androidx.appcompat.widget.SearchView
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.guilhermelucas.data.datasource.SeriesDataSource
 import com.guilhermelucas.data.datasource.TVMazeApi
@@ -17,6 +16,7 @@ import com.guilhermelucas.seriesdatabase.R
 import com.guilhermelucas.seriesdatabase.databinding.FragmentHomeBinding
 import com.guilhermelucas.seriesdatabase.home.adapter.AdapterItem
 import com.guilhermelucas.seriesdatabase.home.adapter.HomeAdapter
+import com.guilhermelucas.seriesdatabase.detail.SeriesDetailActivity
 import com.guilhermelucas.seriesdatabase.utils.extensions.getViewModel
 import com.guilhermelucas.seriesdatabase.utils.extensions.setupObserver
 
@@ -137,8 +137,11 @@ class HomeFragment : Fragment() {
     }
 
     private fun goToDetailsObserver(id: Int) {
-        val action = HomeFragmentDirections.actionNavHomeToNavGallery(id)
-        findNavController().navigate(action)
+//        val action = HomeFragmentDirections.actionNavHomeToNavGallery(id)
+//        findNavController().navigate(action)
+        startActivity(
+            SeriesDetailActivity.newInstance(requireContext(), id)
+        )
     }
 
     private fun changeVisibilityObserver(state: HomeViewModel.AdapterVisibility) {

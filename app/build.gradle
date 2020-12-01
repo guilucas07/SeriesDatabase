@@ -18,7 +18,7 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        buildConfigField "String", "API_TV_MAZE", '"https://min-api.cryptocompare.com/"'
+        buildConfigField "String", "API_TV_MAZE", '"https://api.tvmaze.com/"'
     }
 
     buildTypes {

@@ -1,4 +1,4 @@
-package com.guilhermelucas.seriesdatabase.seriesdetail
+package com.guilhermelucas.seriesdatabase.detail.data
 
 import com.guilhermelucas.data.datasource.SeriesDataSource
 import com.guilhermelucas.model.Episode

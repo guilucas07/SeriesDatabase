@@ -1,4 +1,4 @@
-package com.guilhermelucas.seriesdatabase.seriesdetail
+package com.guilhermelucas.seriesdatabase.detail.ui
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,56 +8,37 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.navArgs
-import com.guilhermelucas.data.datasource.SeriesDataSource
-import com.guilhermelucas.data.datasource.TVMazeApi
-import com.guilhermelucas.data.utils.RetrofitHelper
-import com.guilhermelucas.seriesdatabase.BuildConfig
+import androidx.fragment.app.activityViewModels
 import com.guilhermelucas.seriesdatabase.R
-import com.guilhermelucas.seriesdatabase.databinding.FragmentSeriesDetailBinding
-import com.guilhermelucas.seriesdatabase.seriesdetail.adapter.SeriesDetailEpisodesAdapter
-import com.guilhermelucas.seriesdatabase.seriesdetail.adapter.model.EpisodeViewObject
-import com.guilhermelucas.seriesdatabase.utils.AndroidResourceProvider
-import com.guilhermelucas.seriesdatabase.utils.extensions.getViewModel
-import com.guilhermelucas.seriesdatabase.utils.extensions.loadImage
+import com.guilhermelucas.seriesdatabase.databinding.FragmentSeriesEpisodesBinding
+import com.guilhermelucas.seriesdatabase.detail.SeriesDetailViewModel
+import com.guilhermelucas.seriesdatabase.detail.model.SeriesDetailViewObject
+import com.guilhermelucas.seriesdatabase.detail.ui.adapter.SeriesDetailEpisodesAdapter
+import com.guilhermelucas.seriesdatabase.detail.ui.adapter.model.EpisodeViewObject
 import com.guilhermelucas.seriesdatabase.utils.extensions.setupObserver
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 
-class SeriesDetailFragment : Fragment() {
+class SeriesEpisodesFragment : Fragment() {
 
-    private var binding: FragmentSeriesDetailBinding? = null
-    private val args: SeriesDetailFragmentArgs by navArgs()
+    private var binding: FragmentSeriesEpisodesBinding? = null
     private val adapter: SeriesDetailEpisodesAdapter by lazy {
         SeriesDetailEpisodesAdapter(
             CoroutineScope(SupervisorJob() + Dispatchers.Main.immediate)
         )
     }
 
-    private val viewModel: SeriesDetailViewModel by lazy {
-        getViewModel {
-            SeriesDetailViewModel(
-                args.seriesId,
-                SeriesDetailRepository(
-                    SeriesDataSource(
-                        RetrofitHelper.createService<TVMazeApi>(BuildConfig.API_TV_MAZE)
-                    )
-                ),
-                AndroidResourceProvider(requireContext())
-            )
-        }
-    }
+    private val viewModel: SeriesDetailViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ) = FragmentSeriesDetailBinding.inflate(inflater).also {
+    ) = FragmentSeriesEpisodesBinding.inflate(inflater).also {
         binding = it
         it.setupView()
         setupObserver()
-        SeriesDetailFragmentArgs
     }.root
 
     override fun onDestroyView() {
@@ -65,7 +46,7 @@ class SeriesDetailFragment : Fragment() {
         binding = null
     }
 
-    private fun FragmentSeriesDetailBinding.setupView() {
+    private fun FragmentSeriesEpisodesBinding.setupView() {
         seasonEpisodesRecycler.adapter = adapter
         seasonsSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(parent: AdapterView<*>?) {
@@ -84,9 +65,9 @@ class SeriesDetailFragment : Fragment() {
     }
 
     private fun setupObserver() = with(viewModel) {
-        setupObserver(seriesBasicInfo to ::seriesBasicInfoObserver)
         setupObserver(seasonEpisodes to ::seasonEpisodesObserver)
         setupObserver(isLoadingSeasonEpisodes to ::isLoadingSeasonEpisodesObserver)
+        setupObserver(seriesBasicInfo to ::setupInformation)
     }
 
     private fun isLoadingSeasonEpisodesObserver(isVisible: Boolean) {
@@ -100,14 +81,9 @@ class SeriesDetailFragment : Fragment() {
         adapter.loadItems(list)
     }
 
-    private fun seriesBasicInfoObserver(info: SeriesDetailViewObject) {
-        binding?.run {
-            exhibitionDetailsText.text = info.exhibitionDescription
-            genresText.text = info.genres
-            summaryText.text = info.summary
-            seasonsSpinner.adapter = getSeasonsAdapter(info.seasonsList)
-            titleText.text = info.name
-            posterImage.loadImage(info.imageUrl)
+    private fun setupInformation(series: SeriesDetailViewObject) {
+        binding?.seasonsSpinner?.run {
+            adapter = getSeasonsAdapter(series.seasonsList)
         }
     }
 
@@ -118,10 +94,6 @@ class SeriesDetailFragment : Fragment() {
         )
         spinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         return spinnerArrayAdapter
-    }
-
-    private fun isLoadingObserver(isVisible: Boolean) {
-        //TODO handle progress visibility
     }
 
 }

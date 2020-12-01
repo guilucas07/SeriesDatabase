@@ -3,8 +3,8 @@ package com.guilhermelucas.seriesdatabase.utils.extensions
 import com.guilhermelucas.model.Episode
 import com.guilhermelucas.model.ResourceProvider
 import com.guilhermelucas.seriesdatabase.R
-import com.guilhermelucas.seriesdatabase.seriesdetail.adapter.model.EpisodeDetailsViewObject
-import com.guilhermelucas.seriesdatabase.seriesdetail.adapter.model.EpisodeViewObject
+import com.guilhermelucas.seriesdatabase.detail.ui.adapter.model.EpisodeDetailsViewObject
+import com.guilhermelucas.seriesdatabase.detail.ui.adapter.model.EpisodeViewObject
 import java.text.SimpleDateFormat
 import java.util.*
 

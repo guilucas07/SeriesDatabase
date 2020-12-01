@@ -1,13 +1,13 @@
-package com.guilhermelucas.seriesdatabase.seriesdetail.adapter
+package com.guilhermelucas.seriesdatabase.detail.ui.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.guilhermelucas.seriesdatabase.databinding.AdapterSeasonEpisodeDetailItemBinding
 import com.guilhermelucas.seriesdatabase.databinding.AdapterSeasonEpisodeItemBinding
-import com.guilhermelucas.seriesdatabase.seriesdetail.adapter.model.EpisodeDetailsViewObject
-import com.guilhermelucas.seriesdatabase.seriesdetail.adapter.model.EpisodeViewObject
-import com.guilhermelucas.seriesdatabase.seriesdetail.adapter.viewholder.EpisodeDetailsViewHolder
-import com.guilhermelucas.seriesdatabase.seriesdetail.adapter.viewholder.EpisodeViewHolder
+import com.guilhermelucas.seriesdatabase.detail.ui.adapter.model.EpisodeDetailsViewObject
+import com.guilhermelucas.seriesdatabase.detail.ui.adapter.model.EpisodeViewObject
+import com.guilhermelucas.seriesdatabase.detail.ui.adapter.viewholder.EpisodeDetailsViewHolder
+import com.guilhermelucas.seriesdatabase.detail.ui.adapter.viewholder.EpisodeViewHolder
 import com.guilhermelucas.seriesdatabase.utils.ExpandableRecyclerViewAdapter
 import kotlinx.coroutines.CoroutineScope
 
