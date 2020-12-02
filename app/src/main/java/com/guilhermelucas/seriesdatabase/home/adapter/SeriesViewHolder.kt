@@ -6,7 +6,7 @@ import com.guilhermelucas.seriesdatabase.R
 import com.guilhermelucas.seriesdatabase.databinding.AdapterMovieItemBinding
 import com.guilhermelucas.seriesdatabase.utils.extensions.loadImage
 
-class MovieViewHolder(
+class SeriesViewHolder(
     private val clickListener: (position: Int) -> Unit,
     private val layout: AdapterMovieItemBinding
 ) : RecyclerView.ViewHolder(layout.root) {

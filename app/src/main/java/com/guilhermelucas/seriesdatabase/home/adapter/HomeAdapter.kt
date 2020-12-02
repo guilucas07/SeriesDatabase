@@ -8,7 +8,7 @@ import com.guilhermelucas.seriesdatabase.databinding.AdapterMovieItemBinding
 class HomeAdapter(
     private val clickListener: (position: Int) -> Unit
 ) :
-    RecyclerView.Adapter<MovieViewHolder>() {
+    RecyclerView.Adapter<SeriesViewHolder>() {
 
     private val items: ArrayList<AdapterItem> =
         arrayListOf()
@@ -19,8 +19,8 @@ class HomeAdapter(
         notifyDataSetChanged()
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
-        return MovieViewHolder(
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SeriesViewHolder {
+        return SeriesViewHolder(
             clickListener,
             AdapterMovieItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         )
@@ -28,7 +28,7 @@ class HomeAdapter(
 
     override fun getItemCount() = items.size
 
-    override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: SeriesViewHolder, position: Int) {
         items.getOrNull(position)?.let {
             holder.bind(it)
         }
