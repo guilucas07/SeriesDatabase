@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?attr/backgroundColor"
+    android:padding="@dimen/activity_internal_elements_margin">
+
+    <TextView
+        android:id="@+id/episodesHeaderText"
+        style="@style/Text.Caption.Large"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="?attr/colorOnBackground"
+        android:layout_marginTop="@dimen/activity_internal_elements_margin"
+        android:text="@string/episodes"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Spinner
+        android:id="@+id/seasonsSpinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:layout_marginTop="@dimen/activity_internal_elements_margin"
+        android:backgroundTint="@color/white"
+        app:layout_goneMarginTop="4dp"
+        app:layout_constraintTop_toBottomOf="@+id/episodesHeaderText"
+        app:layout_constraintStart_toStartOf="@+id/episodesHeaderText" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/seasonEpisodesRecycler"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/activity_internal_elements_margin"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/seasonsSpinner"
+        tools:listitem="@layout/adapter_season_episode_item" />
+
+    <ProgressBar
+        android:id="@+id/seasonEpisodesProgress"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:indeterminate="true"
+        android:progressTint="@color/progress_tint"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/seasonsSpinner" />
+</androidx.constraintlayout.widget.ConstraintLayout>

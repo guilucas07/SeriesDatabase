@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="4dp"
+    android:background="?attr/cardBackgroundColor"
+    android:paddingHorizontal="@dimen/activity_internal_elements_margin"
+    android:paddingVertical="@dimen/activity_internal_elements_extra_margin">
+
+    <ImageView
+        android:id="@+id/posterImage"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="1" />
+
+    <TextView
+        android:id="@+id/summaryText"
+        style="@style/Text.Body.Small"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/activity_internal_elements_margin"
+        android:ellipsize="end"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/airDateText"
+        app:layout_constraintStart_toEndOf="@id/posterImage"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="A disgusting 'thing' – implied to be human feces – is left in Michael's office, and he tries to discover who did it. While his carpet is being replaced, he uses Jim's desk, forcing him to move away from Pam into the annex mplied to be human feces – is left in Michael's office, and he tries to discover who did it. While his carpet is being r" />
+
+    <TextView
+        android:id="@+id/airDateText"
+        style="@style/Text.Body.Small"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="end"
+        android:paddingEnd="0dp"
+        android:paddingStart="@dimen/activity_horizontal_margin"
+        app:layout_constraintBottom_toBottomOf="@id/summaryText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/summaryText"
+        tools:text="2006-01-26" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
