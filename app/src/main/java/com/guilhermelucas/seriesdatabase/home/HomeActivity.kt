@@ -9,31 +9,18 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
-import com.guilhermelucas.data.datasource.SeriesDataSource
-import com.guilhermelucas.data.utils.RetrofitHelper
-import com.guilhermelucas.seriesdatabase.BuildConfig
 import com.guilhermelucas.seriesdatabase.R
 import com.guilhermelucas.seriesdatabase.databinding.ActivityMainBinding
 import com.guilhermelucas.seriesdatabase.detail.SeriesDetailActivity
 import com.guilhermelucas.seriesdatabase.home.adapter.AdapterItem
 import com.guilhermelucas.seriesdatabase.home.adapter.HomeAdapter
-import com.guilhermelucas.seriesdatabase.utils.extensions.getViewModel
 import com.guilhermelucas.seriesdatabase.utils.extensions.setupObserver
+import org.koin.android.viewmodel.ext.android.viewModel
 
 class HomeActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
-    private val viewModel: HomeViewModel by lazy {
-        getViewModel {
-            HomeViewModel(
-                HomeRepository(
-                    SeriesDataSource(
-                        RetrofitHelper.createService(BuildConfig.API_TV_MAZE)
-                    )
-                )
-            )
-        }
-    }
+    private val viewModel: HomeViewModel by viewModel()
 
     private val adapter =
         HomeAdapter { position ->

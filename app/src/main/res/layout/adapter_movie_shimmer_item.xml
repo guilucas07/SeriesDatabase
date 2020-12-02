@@ -38,7 +38,6 @@
                 android:lines="1"
                 android:maxLines="2"
                 android:text="@string/series_title_placeholder"
-                android:textColor="@color/black"
                 android:textStyle="bold"
                 tools:text="Titanic" />
 
@@ -49,8 +48,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/textMovieTitle"
                 android:layout_marginHorizontal="8dp"
-                android:text="@string/series_premiered_placeholder"
-                android:textColor="@color/black"
+                android:text="@string/series_rating_placeholder"
                 android:textStyle="italic"
                 tools:text="10/05/1997" />
 
@@ -62,7 +60,6 @@
                 android:layout_below="@+id/textMovieReleaseDate"
                 android:layout_marginHorizontal="8dp"
                 android:layout_marginTop="4dp"
-                android:textColor="@color/black"
                 android:textStyle="italic"
                 android:visibility="gone"
                 tools:text="Score 10%" />

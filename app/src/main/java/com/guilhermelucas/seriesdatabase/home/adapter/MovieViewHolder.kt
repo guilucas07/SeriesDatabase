@@ -2,6 +2,7 @@ package com.guilhermelucas.seriesdatabase.home.adapter
 
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
+import com.guilhermelucas.seriesdatabase.R
 import com.guilhermelucas.seriesdatabase.databinding.AdapterMovieItemBinding
 import com.guilhermelucas.seriesdatabase.utils.extensions.loadImage
 
@@ -10,23 +11,15 @@ class MovieViewHolder(
     private val layout: AdapterMovieItemBinding
 ) : RecyclerView.ViewHolder(layout.root) {
 
-    fun bind(movie: AdapterItem) {
+    fun bind(series: AdapterItem) {
         with(layout) {
-            textMovieTitle.text = movie.title
-
-            movie.releaseDate?.run {
-                textMovieReleaseDate.text = this
-            }
-
+            titleText.text = series.title
+            ratingText.text = series.ratingText
+            posterImage.loadImage(series.posterUrl)
+            textMovieSimilarity.isVisible = series.similarity != null
+            textMovieSimilarity.text = series.similarity
             root.setOnClickListener {
                 clickListener(adapterPosition)
-            }
-
-            imageMoviePoster.loadImage(movie.posterUrl)
-
-            textMovieSimilarity.isVisible = movie.similarity != null
-            if(movie.similarity != null){
-                textMovieSimilarity.text = "Score ${movie.similarity.toInt()} %"
             }
         }
     }

@@ -14,20 +14,20 @@
         android:background="@android:color/transparent">
 
         <ImageView
-            android:id="@+id/imageMoviePoster"
+            android:id="@+id/posterImage"
             android:layout_width="match_parent"
             android:layout_height="250dp"
-            android:scaleType="centerCrop"
-            android:importantForAccessibility="no" />
+            android:importantForAccessibility="no"
+            android:scaleType="centerCrop" />
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingBottom="8dp"
-            android:layout_below="@+id/imageMoviePoster">
+            android:layout_below="@+id/posterImage"
+            android:paddingBottom="8dp">
 
             <TextView
-                android:id="@+id/textMovieTitle"
+                android:id="@+id/titleText"
                 style="@style/Text.Body"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -37,18 +37,16 @@
                 android:ellipsize="end"
                 android:lines="1"
                 android:maxLines="2"
-                android:textColor="@color/black"
                 android:textStyle="bold"
                 tools:text="Titanic" />
 
             <TextView
-                android:id="@+id/textMovieReleaseDate"
+                android:id="@+id/ratingText"
                 style="@style/Text.Body.Small"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/textMovieTitle"
+                android:layout_below="@+id/titleText"
                 android:layout_marginHorizontal="8dp"
-                android:textColor="@color/black"
                 android:textStyle="italic"
                 tools:text="10/05/1997" />
 
@@ -57,7 +55,7 @@
                 style="@style/Text.Body.Small"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/textMovieReleaseDate"
+                android:layout_below="@+id/ratingText"
                 android:layout_marginHorizontal="8dp"
                 android:layout_marginTop="4dp"
                 android:textColor="@color/black"

@@ -10,7 +10,7 @@ import java.time.format.TextStyle
 import java.util.*
 import kotlin.collections.ArrayList
 
-fun Series.toAdapterItem(): AdapterItem {
+fun Series.toAdapterItem(resourceProvider: ResourceProvider): AdapterItem {
 
     return AdapterItem(
         id,
@@ -19,10 +19,10 @@ fun Series.toAdapterItem(): AdapterItem {
         rating,
         imageUrl.orEmpty(),
         imageLargeUrl.orEmpty(),
-        premiered
+        premiered,
+        ratingText = rating?.let { resourceProvider.getString(R.string.series_rating, it) }.orEmpty()
     )
 }
-
 
 fun Series.toDetailsViewObject(resourceProvider: ResourceProvider): SeriesDetailViewObject {
 

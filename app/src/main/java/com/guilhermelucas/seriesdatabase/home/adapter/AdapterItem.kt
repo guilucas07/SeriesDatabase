@@ -8,5 +8,6 @@ data class AdapterItem(
     val posterUrl: String?,
     val backdropUrl: String?,
     val releaseDate: String?,
-    val similarity : Double? = null
+    val ratingText: String,
+    val similarity: String? = null
 )

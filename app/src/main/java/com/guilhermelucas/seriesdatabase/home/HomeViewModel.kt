@@ -3,6 +3,7 @@ package com.guilhermelucas.seriesdatabase.home
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.guilhermelucas.model.ResourceProvider
 import com.guilhermelucas.model.Series
 import com.guilhermelucas.seriesdatabase.base.BaseViewModel
 import com.guilhermelucas.seriesdatabase.home.adapter.AdapterItem
@@ -11,7 +12,10 @@ import com.guilhermelucas.seriesdatabase.utils.extensions.toAdapterItem
 import com.guilhermelucas.seriesdatabase.utils.models.RequestError
 import kotlinx.coroutines.launch
 
-class HomeViewModel(private val repository: HomeRepository) : BaseViewModel() {
+class HomeViewModel(
+    private val repository: HomeRepository,
+    private val resourceProvider: ResourceProvider
+) : BaseViewModel() {
 
     enum class AdapterVisibility {
         EMPTY_VIEW, SEARCH_EMPTY_VIEW, DATA_VIEW, SHIMMER_LOADING
@@ -61,7 +65,7 @@ class HomeViewModel(private val repository: HomeRepository) : BaseViewModel() {
                 runCatching {
                     repository.searchSeries(query)
                 }.onSuccess { returnedList ->
-                    val newList = returnedList.map { it.toAdapterItem() }
+                    val newList = returnedList.map { it.toAdapterItem(resourceProvider) }
                     _loadedSeries.postValue(newList)
 
                     _changeAdapterVisibility.postValue(
@@ -114,9 +118,9 @@ class HomeViewModel(private val repository: HomeRepository) : BaseViewModel() {
                 }.onSuccess { listMovies: List<Series> ->
                     val newList: List<AdapterItem> =
                         if (repositoryRequestStrategy1 == HomeRepository.RequestStrategy.FIRST_PAGE)
-                            listMovies.map { it.toAdapterItem() }
+                            listMovies.map { it.toAdapterItem(resourceProvider) }
                         else
-                            _loadedSeries.value.orEmpty() + listMovies.map { it.toAdapterItem() }
+                            _loadedSeries.value.orEmpty() + listMovies.map { it.toAdapterItem(resourceProvider) }
 
                     _changeAdapterVisibility.postValue(
                         if (newList.isNotEmpty())
