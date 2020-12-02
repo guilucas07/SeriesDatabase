@@ -52,11 +52,10 @@ dependencies {
     implementation androidSupport.values()
     implementation retrofit.values()
     implementation layoutShimmer.values()
+    implementation koin.values()
 
     testImplementation unitTest.values()
     testImplementation group: 'org.mockito', name: 'mockito-inline', version: mockitoVersion
     androidTestImplementation androidTest.values()
-
-    implementation 'androidx.navigation:navigation-fragment-ktx:2.3.1'
 
 }

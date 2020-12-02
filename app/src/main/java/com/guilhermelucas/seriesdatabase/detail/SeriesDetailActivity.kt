@@ -15,24 +15,15 @@ import com.guilhermelucas.seriesdatabase.detail.ui.SeriesDetailPageAdapter
 import com.guilhermelucas.seriesdatabase.utils.AndroidResourceProvider
 import com.guilhermelucas.seriesdatabase.utils.extensions.getViewModel
 import com.guilhermelucas.seriesdatabase.utils.extensions.setupObserver
+import org.koin.android.ext.android.inject
+import org.koin.android.viewmodel.ext.android.viewModel
+import org.koin.core.parameter.parametersOf
 
 class SeriesDetailActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivitySeriesDetailBinding
     private var seriesId: Int = 0
-    private val viewModel: SeriesDetailViewModel by lazy {
-        getViewModel {
-            SeriesDetailViewModel(
-                seriesId,
-                SeriesDetailRepository(
-                    SeriesDataSource(
-                        RetrofitHelper.createService<TVMazeApi>(BuildConfig.API_TV_MAZE)
-                    )
-                ),
-                AndroidResourceProvider(baseContext)
-            )
-        }
-    }
+    private val viewModel: SeriesDetailViewModel by viewModel { parametersOf(seriesId) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
