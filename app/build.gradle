@@ -55,7 +55,6 @@ dependencies {
     implementation koin.values()
 
     testImplementation unitTest.values()
-    testImplementation group: 'org.mockito', name: 'mockito-inline', version: mockitoVersion
     androidTestImplementation androidTest.values()
 
 }

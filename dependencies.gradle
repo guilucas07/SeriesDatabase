@@ -5,7 +5,6 @@ ext {
     jUnitVersion = '4.12'
     designVersion = '1.2.1'
     glideVersion = '4.8.0'
-    mockitoVersion = '3.6.0'
     expressoVersion = '3.0.2'
     appCompatVersion = '1.2.0'
     coreKtxVersion = '1.3.2'
@@ -18,6 +17,9 @@ ext {
     swipeRefreshVersion = '1.1.0'
     facebookShimmerVersion = '0.5.0'
     koinVersion = '2.0.1'
+    coroutinesTestingVersion = '1.4.1'
+    mockkVersion = '1.9.3'
+    robolectricVersion = '4.3.1'
 
     retrofit = [
             retrofit      : "com.squareup.retrofit2:retrofit:$retrofitVersion",
@@ -55,9 +57,11 @@ ext {
     ]
 
     unitTest = [
-            junit      : "junit:junit:$jUnitVersion",
-            mock       : "org.mockito:mockito-core:$mockitoVersion",
-            coreTesting: "androidx.arch.core:core-testing:$coreTestingVersion"
+            junit            : "junit:junit:$jUnitVersion",
+            mock             : "io.mockk:mockk:$mockkVersion",
+            coreTesting      : "androidx.arch.core:core-testing:$coreTestingVersion",
+            coroutinesTesting: "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutinesTestingVersion",
+            roboletric      : "org.robolectric:robolectric:$robolectricVersion"
     ]
 
     koin = [
