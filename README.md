@@ -5,9 +5,10 @@ Simple app to show movies from TVMazeApi using MVVM, coroutines and clean archit
 ## TODO
  - ~Add dark theme~ OK
  - Unit test data layer - WIP
+ - Android DataBinding
  - Unit test app layer
- - Add to favorite
- - Access control
+ - Add series to favorite
+ - Access control with pin and fingerprint
  - Search people
  - Config ProGuard
 

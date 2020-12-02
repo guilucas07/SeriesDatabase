@@ -20,7 +20,7 @@ fun Series.toAdapterItem(resourceProvider: ResourceProvider): AdapterItem {
         imageUrl.orEmpty(),
         imageLargeUrl.orEmpty(),
         premiered,
-        ratingText = rating?.let { resourceProvider.getString(R.string.series_rating, it) }.orEmpty()
+        ratingText = rating?.let { resourceProvider.getString(R.string.series_rating, it) } ?: resourceProvider.getString(R.string.series_without_rating)
     )
 }
 

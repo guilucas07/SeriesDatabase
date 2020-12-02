@@ -6,5 +6,6 @@ import com.guilhermelucas.seriesdatabase.R
 import com.guilhermelucas.seriesdatabase.home.adapter.AdapterItem
 
 fun SearchSeries.toAdapterItem(resourceProvider: ResourceProvider): AdapterItem {
-    return series.toAdapterItem(resourceProvider).copy(similarity = resourceProvider.getString(R.string.similarity_score, searchSimilarity))
+    return series.toAdapterItem(resourceProvider)
+        .copy(similarity = resourceProvider.getString(R.string.similarity_score, searchSimilarity))
 }
