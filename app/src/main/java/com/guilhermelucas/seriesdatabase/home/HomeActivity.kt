@@ -5,19 +5,22 @@ import android.os.Handler
 import android.os.Looper
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.guilhermelucas.seriesdatabase.R
+import com.guilhermelucas.seriesdatabase.base.BaseActivity
 import com.guilhermelucas.seriesdatabase.databinding.ActivityMainBinding
 import com.guilhermelucas.seriesdatabase.detail.SeriesDetailActivity
 import com.guilhermelucas.seriesdatabase.home.adapter.AdapterItem
 import com.guilhermelucas.seriesdatabase.home.adapter.HomeAdapter
 import com.guilhermelucas.seriesdatabase.utils.extensions.setupObserver
+import com.guilhermelucas.seriesdatabase.utils.models.RequestError
 import org.koin.android.viewmodel.ext.android.viewModel
 
-class HomeActivity : AppCompatActivity() {
+class HomeActivity : BaseActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private val viewModel: HomeViewModel by viewModel()
@@ -115,6 +118,7 @@ class HomeActivity : AppCompatActivity() {
         setupObserver(goToDetails to ::goToDetailsObserver)
         setupObserver(changeAdapterVisibility to ::changeVisibilityObserver)
         setupObserver(scrollToPosition to ::scrollPositionObserver)
+        setupObserver(showRequestError to ::showRequestErrorMessage)
     }
 
     private fun scrollPositionObserver(position: Int) {

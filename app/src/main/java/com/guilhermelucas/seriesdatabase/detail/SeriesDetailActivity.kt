@@ -3,11 +3,14 @@ package com.guilhermelucas.seriesdatabase.detail
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.guilhermelucas.data.datasource.SeriesDataSource
 import com.guilhermelucas.data.datasource.TVMazeApi
 import com.guilhermelucas.data.utils.RetrofitHelper
 import com.guilhermelucas.seriesdatabase.BuildConfig
+import com.guilhermelucas.seriesdatabase.R
+import com.guilhermelucas.seriesdatabase.base.BaseActivity
 import com.guilhermelucas.seriesdatabase.databinding.ActivitySeriesDetailBinding
 import com.guilhermelucas.seriesdatabase.detail.data.SeriesDetailRepository
 import com.guilhermelucas.seriesdatabase.detail.model.SeriesDetailViewObject
@@ -15,11 +18,12 @@ import com.guilhermelucas.seriesdatabase.detail.ui.SeriesDetailPageAdapter
 import com.guilhermelucas.seriesdatabase.utils.AndroidResourceProvider
 import com.guilhermelucas.seriesdatabase.utils.extensions.getViewModel
 import com.guilhermelucas.seriesdatabase.utils.extensions.setupObserver
+import com.guilhermelucas.seriesdatabase.utils.models.RequestError
 import org.koin.android.ext.android.inject
 import org.koin.android.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
-class SeriesDetailActivity : AppCompatActivity() {
+class SeriesDetailActivity : BaseActivity() {
 
     private lateinit var binding: ActivitySeriesDetailBinding
     private var seriesId: Int = 0
@@ -50,6 +54,7 @@ class SeriesDetailActivity : AppCompatActivity() {
 
     private fun setupObservers() = with(viewModel) {
         setupObserver(seriesBasicInfo to ::seriesBasicInfoObserver)
+        setupObserver(showRequestError to ::showRequestErrorMessage)
     }
 
     private fun seriesBasicInfoObserver(series: SeriesDetailViewObject) {
