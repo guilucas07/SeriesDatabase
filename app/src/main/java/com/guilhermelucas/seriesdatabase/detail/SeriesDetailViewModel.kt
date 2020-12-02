@@ -35,7 +35,7 @@ class SeriesDetailViewModel(
                     onSpinnerSeasonUpdated(0)
 
             }.onFailure {
-                it.printStackTrace()
+                _showRequestError.postValue(handleThrowable(it))
             }
         }
     }
